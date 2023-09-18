@@ -49,10 +49,13 @@
   </p>
 </div>
 <div id="connexion">
-  <a>Pseudo:</a>
-  <input type="text">
-  <a>Mot de passe:</a>
-  <input type="text">
-  <button (click)="submit()">Se connecter</button>
+  <p *ngIf="isLogged">Vous êtes connecté en tant que {{user.name}} - {{user.role}} <button (click)="logout()">se deco</button></p>
+  <form *ngIf="!isLogged" [formGroup]="fg" (ngSubmit)="submit()">
+    <a>Pseudo :</a>
+    <input type="text" formControlName="pseudo">
+    <a>Mot de passe :</a>
+    <input type="password" formControlName="password">
+    <button>Se connecter</button>
+  </form>
 </div>
 

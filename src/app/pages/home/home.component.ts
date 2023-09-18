@@ -36,7 +36,7 @@ export class HomeComponent {
     if(this.fg.invalid)
       return;
     this._loginService.login(this.fg.value).subscribe({
-      next: () => this._router.navigate(['/home'])
+      next: () => this._router.navigate(['/character'])
     });
   }
 
