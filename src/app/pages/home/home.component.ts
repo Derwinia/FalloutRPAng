@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   templateUrl: './home.component.html',
@@ -7,55 +9,38 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent {
 
-  pwd1 : string = "test";
-  pwd2 : string = "test2";
-  pwd3 : string = "test3";
-  pwd4 : string = "test4";
+  isLogged: boolean = false;
+  fg!: FormGroup;
+  user: any = {};
 
-  constructor(private _router:Router) { }
+  constructor(
+    private _router:Router,
+    private _fb: FormBuilder,
+    private _loginService: LoginService,
+  ) { }
 
-  chooseTeam(choice : number) {
-
-    let pwd = prompt("Un intrus ! donnez le mot de passe ou vous resterez dehors !");
-    if (pwd == null || pwd == "") {
-      pwd = "";
-    } else {
-      switch (choice){
-        case 1:
-          if(pwd == this.pwd1){
-            alert("bienvenu joueur de l'équipe 1")
-            this._router.navigate(['/manuel'])
-          }
-          else
-            alert("Je crois pas non ! Dégage !")
-          break;
-        case 2:
-          if(pwd == this.pwd2){
-            alert("bienvenu joueur de l'équipe 2")
-            this._router.navigate(['/manuel'])
-          }
-          else
-            alert("Je crois pas non ! Dégage !")
-          break;
-        case 3:
-          if(pwd == this.pwd3){
-            alert("bienvenu joueur de l'équipe 3")
-            this._router.navigate(['/manuel'])
-          }
-          else
-            alert("Je crois pas non ! Dégage !")
-          break;
-        case 4:
-          if(pwd == this.pwd4){
-            alert("bienvenu joueur de l'équipe 4")
-            this._router.navigate(['/manuel'])
-          }
-          else
-            alert("Je crois pas non ! Dégage !")
-          break;
-        default:
-            console.log("erreur")
+  ngOnInit(): void {
+    this.fg = this._fb.group({
+      pseudo: [null, [Validators.required]],
+      password: [null, [Validators.required]]
+    });
+    this._loginService.user$.subscribe({
+      next: user => {
+        this.isLogged = !!user.token;
+        this.user = user
       }
-    }
+    });
+  }
+
+  submit() {
+    if(this.fg.invalid)
+      return;
+    this._loginService.login(this.fg.value).subscribe({
+      next: () => this._router.navigate(['/home'])
+    });
+  }
+
+  logout() {
+    this._loginService.logout();
   }
 }

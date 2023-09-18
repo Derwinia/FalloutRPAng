@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { authentificationService } from './services/authentification.service';
+import { LoginService } from './services/login.service';
 
 @Component({
   selector: 'app-root',
@@ -8,17 +8,19 @@ import { authentificationService } from './services/authentification.service';
 })
 export class AppComponent implements OnInit {
 
-  localIsAuth! : boolean
+  isLogged : boolean = false;
+  user : any ={};
 
   constructor(
-    private authService : authentificationService
+    private _loginService : LoginService
   ) {}
   ngOnInit(): void {
-    this.authService.isAuthSubject.subscribe({
-      next : (data : boolean) => { this.localIsAuth = data} ,
-      error : () => {} ,
-      complete : () => {}
-    })
+    this._loginService.user$.subscribe({
+      next: user => {
+        this.isLogged = !!user.token;
+        this.user = user
+      }
+    });
   }
   title = 'FalloutRP';
 }

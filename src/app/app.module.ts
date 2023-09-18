@@ -16,6 +16,8 @@ import { RadioComponent } from './pages/radio/radio.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CdkDropList, CdkDrag } from '@angular/cdk/drag-drop';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -36,6 +38,9 @@ import { CdkDropList, CdkDrag } from '@angular/cdk/drag-drop';
     BrowserAnimationsModule,
     CdkDropList,
     CdkDrag,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

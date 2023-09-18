@@ -25,16 +25,24 @@
 }
 
 
-#chooseteam{
+#connexion{
+  font-size: 4vh;
   height: 10vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
+  a{
+    margin-left: 1vh;
+    margin-right: 1vh;
+  }
+  input{
+    height: 3vh;
+    width: 20vh;
+  }
   button{
     font-size: 4vh;
     height: 6vh;
-    width: 20vh;
     margin: 1vh 1vh 1vh 1vh;
   }
 }
