@@ -1,0 +1,35 @@
+#mainframe{
+  aspect-ratio: 16/9;
+  max-height: 100vh;
+  width: 100vw;
+  background-image: url("/assets/images/PipBoysv2.jpg");
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-color: black;
+  color: greenyellow;
+  display: flex;
+  justify-content: center;
+}
+
+#maincontentframe{
+  width: 80%;
+  height: 100vh;
+}
+
+#maintitle{
+  height: 16vh;
+  margin-top: 5vh;
+  text-align: center;
+}
+
+h1{
+  font-size: 12vh;
+}
+
+h2{
+  font-size: 2vh;
+}
+
+#contentframe{
+  height: 72vh;
+}

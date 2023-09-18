@@ -1,1 +1,34 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "overseer";
+    src: local("Overseer"), url(./assets/fonts/Overseer.otf) format("truetype");
+}
+
+@font-face {
+  font-family: "overseerBold";
+    src: local("OverseerBold"), url(./assets/fonts/OverseerBold.otf) format("truetype");
+}
+
+* {
+  font-family: "overseerBold";
+  letter-spacing: 0.5px;
+  padding: 0;
+  margin: 0;
+}
+
+#bck{
+  background-color: black;
+  display: flex;
+  justify-content: center;
+}
+
+button{
+  border-color: greenyellow;
+  background-color: rgba(0, 0, 0, 0);
+  color: greenyellow;
+  border-radius: 1.5vh;
+  transition-duration: 0.5s;
+}
+button:hover{
+  color: black;
+  background-color: greenyellow;
+}

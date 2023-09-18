@@ -1,0 +1,45 @@
+.ruleslist {
+  width: 100%;
+  max-height: 650px;
+  display: block;
+  border-radius: 4px;
+  overflow-y: scroll;
+}
+
+.rulesbox {
+  padding: 20px 10px;
+  border-bottom: solid 1px greenyellow;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  background-color: black;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgb(164, 255, 27),
+              0 8px 10px 1px rgba(164, 255, 27, 0.61),
+              0 3px 14px 2px rgba(164, 255, 27, 0.459);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+
+}
+
+.rulesbox:last-child {
+  border: none;
+  color: greenyellow;
+}
+
+.ruleslist.cdk-drop-list-dragging .rulesbox:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
