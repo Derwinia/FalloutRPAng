@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 
 import { HomeComponent } from './pages/home/home.component';
 import { NavComponent } from './nav/nav.component';
+import { ModifyDialogComponent } from './tool/modifyRule-dialog/modifyRule-dialog.component';
 
 import { RuleComponent } from './pages/rule/rule.component';
 import { CharacterComponent } from './pages/character/character.component';
@@ -18,6 +19,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CdkDropList, CdkDrag } from '@angular/cdk/drag-drop';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -32,6 +37,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     DataComponent,
     MapComponent,
     RadioComponent,
+    ModifyDialogComponent,
 
   ],
   imports: [
@@ -43,8 +49,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -1,1 +1,5 @@
-<p>data works!</p>
+<p *ngIf="player.pseudo">data works!</p>
+<div *ngIf="!player.pseudo" id="connexionNeed">
+  <p>Vous devez être connecté pour pouvoir accéder à cette page !</p>
+  <button [routerLink]="['/home']" routerLinkActive="router-link-active" >Accueil</button>
+</div>

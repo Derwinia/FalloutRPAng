@@ -3,5 +3,12 @@ export interface RuleModel {
   order : number,
   name : string,
   shortDescription : string,
-  fullDescription : string,
+  description : string,
+}
+
+export interface RuleUpdateModel {
+  id : number,
+  name : string,
+  shortDescription : string,
+  description : string,
 }

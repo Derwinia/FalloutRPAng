@@ -11,14 +11,13 @@ import jwtDecode from 'jwt-decode';
 })
 export class LoginService {
 
-  private defaultUser = {
+  private defaultPlayer = {
     token: null,
-    id : null,
-    name: null,
+    pseudo: null,
     role: null,
   }
 
-  user$: BehaviorSubject<any|null> = new BehaviorSubject<any|null>(this.defaultUser);
+  user$: BehaviorSubject<any|null> = new BehaviorSubject<any|null>(this.defaultPlayer);
 
   constructor(
     private _http: HttpClient
@@ -31,20 +30,18 @@ export class LoginService {
         tap(response => {
 
           const decodedToken : any = jwtDecode(response.token);
-          const id = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"];
-          const name = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"];
+          const pseudo = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"];
           const role = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
           this.user$.next({
-            id,
-            name,
+            token: response.token,
+            pseudo,
             role,
-            token: response.token
           });
         })
     );
   }
 
   logout() {
-    this.user$.next(this.defaultUser);
+    this.user$.next(this.defaultPlayer);
   }
 }

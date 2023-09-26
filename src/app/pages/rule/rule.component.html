@@ -1,3 +1,22 @@
-<div cdkDropList class="ruleslist" (cdkDropListDropped)="drop($event)">
-  <div class="rulesbox" *ngFor="let rule of rules" cdkDrag>{{rule.name}} - {{rule.shortDescription}}</div>
+<div *ngIf="player.pseudo">
+
+  <div *ngIf="player.role =='admin'" cdkDropList class="ruleslist" (cdkDropListDropped)="drop($event)">
+    <div class="rulesbox" *ngFor="let rule of rules" cdkDrag>
+      {{rule.name}} - {{rule.shortDescription}}
+      <button (click)="modify(rule)">Modification</button>
+      <button>Supprimer</button>
+    </div>
+  </div>
+
+  <div *ngIf="player.role !='admin'">
+    <ul>
+      <li *ngFor="let rule of rules" cdkDrag>{{rule.name}} - {{rule.shortDescription}}</li>
+    </ul>
+  </div>
+
+</div>
+
+<div *ngIf="!player.pseudo" id="connexionNeed">
+  <p>Vous devez être connecté pour pouvoir accéder à cette page !</p>
+  <button [routerLink]="['/home']" routerLinkActive="router-link-active" >Accueil</button>
 </div>

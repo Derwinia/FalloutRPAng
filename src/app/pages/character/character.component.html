@@ -1,6 +1,10 @@
-<div id="characterContainer">
+<div *ngIf="player.pseudo" id="characterContainer">
   <img src=".\assets\images\FichePerso1.png">
   <img src=".\assets\images\FichePerso2.png">
   <img src=".\assets\images\FichePerso3.png">
   <img src=".\assets\images\FichePerso4.png">
+</div>
+<div *ngIf="!player.pseudo" id="connexionNeed">
+  <p>Vous devez être connecté pour pouvoir accéder à cette page !</p>
+  <button [routerLink]="['/home']" routerLinkActive="router-link-active" >Accueil</button>
 </div>

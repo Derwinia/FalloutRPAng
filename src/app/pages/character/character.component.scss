@@ -5,3 +5,15 @@
     width: 100%;
   }
 }
+
+#connexionNeed{
+  font-size: 3vh;
+  padding: 20%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  button{
+    width: 10vh ;
+    font-size: 3vh;
+  }
+}

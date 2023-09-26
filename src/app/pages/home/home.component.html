@@ -49,8 +49,8 @@
   </p>
 </div>
 <div id="connexion">
-  <p *ngIf="isLogged">Vous êtes connecté en tant que {{user.name}} - {{user.role}} <button (click)="logout()">se deco</button></p>
-  <form *ngIf="!isLogged" [formGroup]="fg" (ngSubmit)="submit()">
+  <p *ngIf="player.pseudo">Vous êtes connecté en tant que {{player.pseudo}} - {{player.role}} <button (click)="logout()">se deco</button></p>
+  <form *ngIf="!player.pseudo" [formGroup]="fg" (ngSubmit)="submit()">
     <a>Pseudo :</a>
     <input type="text" formControlName="pseudo">
     <a>Mot de passe :</a>

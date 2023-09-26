@@ -1,5 +1,9 @@
-<div >
+<div *ngIf="player.pseudo">
   <ul>
     <li *ngFor="let mission of Missions">{{mission.name}} - {{mission.shortDescription}}</li>
   </ul>
+</div>
+<div *ngIf="!player.pseudo" id="connexionNeed">
+  <p>Vous devez être connecté pour pouvoir accéder à cette page !</p>
+  <button [routerLink]="['/home']" routerLinkActive="router-link-active" >Accueil</button>
 </div>
