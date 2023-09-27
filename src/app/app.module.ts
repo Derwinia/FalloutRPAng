@@ -6,9 +6,11 @@ import { AppComponent } from './app.component';
 
 import { HomeComponent } from './pages/home/home.component';
 import { NavComponent } from './nav/nav.component';
-import { ModifyDialogComponent } from './tool/modifyRule-dialog/modifyRule-dialog.component';
 
 import { RuleComponent } from './pages/rule/rule.component';
+import { CreateRuleDialogComponent } from './tool/create-rule-dialog/create-rule-dialog.component';
+import { ModifyRuleDialogComponent } from './tool/modify-rule-dialog/modify-rule-dialog.component';
+
 import { CharacterComponent } from './pages/character/character.component';
 import { MissionComponent } from './pages/mission/mission.component';
 import { DataComponent } from './pages/data/data.component';
@@ -37,7 +39,8 @@ import { MatInputModule } from '@angular/material/input';
     DataComponent,
     MapComponent,
     RadioComponent,
-    ModifyDialogComponent,
+    ModifyRuleDialogComponent,
+    CreateRuleDialogComponent,
 
   ],
   imports: [

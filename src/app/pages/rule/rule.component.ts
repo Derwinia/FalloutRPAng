@@ -3,11 +3,13 @@ import { Component } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 
-import { RuleModel } from 'src/app/models/rule.model';
+import { RuleModel, RuleOrderModel } from 'src/app/models/rule.model';
 import { RuleService } from 'src/app/services/rule.service';
 import { LoginService } from 'src/app/services/login.service';
 import { PlayerModel } from 'src/app/models/player.model';
-import { ModifyDialogComponent } from 'src/app/tool/modifyRule-dialog/modifyRule-dialog.component';
+import { ModifyRuleDialogComponent } from 'src/app/tool/modify-rule-dialog/modify-rule-dialog.component';
+import { CreateRuleDialogComponent } from 'src/app/tool/create-rule-dialog/create-rule-dialog.component';
+import { concatMap, finalize } from 'rxjs';
 
 @Component({
   templateUrl: './rule.component.html',
@@ -15,8 +17,10 @@ import { ModifyDialogComponent } from 'src/app/tool/modifyRule-dialog/modifyRule
 })
 export class RuleComponent {
 
+  isLoading: boolean = false;
   rules! : RuleModel[];
   player: PlayerModel = {token : "", pseudo : "superviseur", role : "admin"};
+  ruleOrder? : RuleOrderModel;
 
   constructor(
     private _ruleService : RuleService,
@@ -34,7 +38,22 @@ export class RuleComponent {
     // });
   }
 
+  create(){
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    const dialogRef = this.dialog.open(CreateRuleDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+        data => this._ruleService.createRule(data)
+    );
+  }
+
   drop(event: CdkDragDrop<string[]>) {
+    this.ruleOrder = { previousOrder : event.previousIndex, currentOrder : event.currentIndex}
+    this._ruleService.modifyRuleOrder(this.ruleOrder)
     moveItemInArray(this.rules, event.previousIndex, event.currentIndex);
   }
 
@@ -45,11 +64,22 @@ export class RuleComponent {
     dialogConfig.autoFocus = true;
     dialogConfig.data = rule
 
-    const dialogRef = this.dialog.open(ModifyDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(ModifyRuleDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
-        data => this._ruleService.changeRule(data)
+        data => this._ruleService.modifyRule(data)
     );
   }
 
+  delete(id: number) {
+    if(confirm("Tu es sûr de ce que tu fais Mathieu ? ")) {
+      this.isLoading = true;
+      this._ruleService.deleteRule(id.toString()).pipe(
+        concatMap(() => this._ruleService.getRules()),
+        finalize(() => this.isLoading = false)
+      ).subscribe({
+        next: response => this.rules = response
+      });
+    }
+  }
 }

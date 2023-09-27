@@ -4,17 +4,17 @@ import { MatDialogRef, MAT_DIALOG_DATA} from "@angular/material/dialog";
 import { RuleModel } from 'src/app/models/rule.model';
 
 @Component({
-  selector: 'app-modifyRule-dialog',
-  templateUrl: './modifyRule-dialog.component.html',
-  styleUrls: ['./modifyRule-dialog.component.scss']
+  selector: 'app-modify-rule-dialog',
+  templateUrl: './modify-rule-dialog.component.html',
+  styleUrls: ['./modify-rule-dialog.component.scss']
 })
-export class ModifyDialogComponent {
+export class ModifyRuleDialogComponent {
 
   form! : FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<ModifyDialogComponent>,
+    private dialogRef: MatDialogRef<ModifyRuleDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: RuleModel
   ){}
 

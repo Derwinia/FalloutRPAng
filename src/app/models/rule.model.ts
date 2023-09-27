@@ -1,3 +1,9 @@
+export interface RuleCreateModel {
+  name : string,
+  shortDescription : string,
+  description : string,
+}
+
 export interface RuleModel {
   id : number,
   order : number,
@@ -11,4 +17,9 @@ export interface RuleUpdateModel {
   name : string,
   shortDescription : string,
   description : string,
+}
+
+export interface RuleOrderModel {
+  previousOrder : number,
+  currentOrder : number,
 }

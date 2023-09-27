@@ -1,3 +1,10 @@
+/* Si on utilise un petit écran (que ce soit avec un ordinateur dans une petite fenêtre ou avec un smartphone), les titres sont réduits */
+// @media only screen and (max-width: 320px) {
+//   h1 {
+//   font-size: 3em;
+//   }
+// }
+
 #mainframe{
   aspect-ratio: 16/9;
   max-height: 100vh;

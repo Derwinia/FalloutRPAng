@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { RuleModel , RuleUpdateModel} from '../models/rule.model';
+import { RuleCreateModel, RuleModel , RuleOrderModel, RuleUpdateModel} from '../models/rule.model';
 
 
 @Injectable({
@@ -11,19 +11,32 @@ import { RuleModel , RuleUpdateModel} from '../models/rule.model';
 })
 export class RuleService {
 
-  updateRule? : RuleUpdateModel;
-
   constructor(
     private _http: HttpClient
   ) { }
 
-  getRules(): Observable<RuleModel[]> {
-    return this._http.get<RuleModel[]>(environment.base_url + '/Rule/List');
+  createRule(newRule : RuleCreateModel){
+    if(newRule){
+      this._http.post<void>(environment.base_url + '/Rule/Create-Rule', newRule).subscribe();
+    }
   }
 
-  changeRule(rule : RuleModel){
-    this.updateRule = {id : rule.id, name : rule.name, shortDescription : rule.shortDescription, description : rule.description};
+  getRules(): Observable<RuleModel[]> {
+    return this._http.get<RuleModel[]>(environment.base_url + '/Rule/List-Rule');
+  }
 
-    this._http.patch(environment.base_url + '/Rule/Update-Rule', this.updateRule).subscribe();
+  modifyRule(rule : RuleOrderModel){
+    if(rule){
+    this._http.patch(environment.base_url + '/Rule/Update-Rule', rule).subscribe();
+    }
+  }
+
+  modifyRuleOrder(rules : RuleOrderModel){
+    console.log(rules)
+    this._http.patch(environment.base_url + '/Rule/Update-Rule-Order', rules).subscribe();
+  }
+
+  deleteRule(id : string): Observable<void>{
+    return this._http.delete<void>(environment.base_url + '/Rule/Delete-Rule/'+id);
   }
 }

@@ -1,16 +1,19 @@
 <div *ngIf="player.pseudo">
 
   <div *ngIf="player.role =='admin'" cdkDropList class="ruleslist" (cdkDropListDropped)="drop($event)">
+    <div id="createButton">
+      <button (click)="create()">Rajouter une règle</button>
+    </div>
     <div class="rulesbox" *ngFor="let rule of rules" cdkDrag>
-      {{rule.name}} - {{rule.shortDescription}}
+      <a id="ruletitle">{{rule.name}}</a><a id="ruledescription">{{rule.shortDescription}}</a>
       <button (click)="modify(rule)">Modification</button>
-      <button>Supprimer</button>
+      <button (click)="delete(rule.id)">Supprimer</button>
     </div>
   </div>
 
   <div *ngIf="player.role !='admin'">
     <ul>
-      <li *ngFor="let rule of rules" cdkDrag>{{rule.name}} - {{rule.shortDescription}}</li>
+      <li *ngFor="let rule of rules" >{{rule.name}} - {{rule.shortDescription}}</li>
     </ul>
   </div>
 
