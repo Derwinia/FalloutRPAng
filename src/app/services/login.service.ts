@@ -12,9 +12,9 @@ import jwtDecode from 'jwt-decode';
 export class LoginService {
 
   private defaultPlayer = {
-    token: null,
-    pseudo: null,
-    role: null,
+    token: "null",
+    pseudo: "superviseur",
+    role: "admin",
   }
 
   user$: BehaviorSubject<any|null> = new BehaviorSubject<any|null>(this.defaultPlayer);

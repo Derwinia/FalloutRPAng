@@ -12,6 +12,9 @@ import { CreateRuleDialogComponent } from './tool/create-rule-dialog/create-rule
 import { ModifyRuleDialogComponent } from './tool/modify-rule-dialog/modify-rule-dialog.component';
 
 import { CharacterComponent } from './pages/character/character.component';
+import { CreateTeamDialogComponent } from './tool/create-team-dialog/create-team-dialog.component';
+import { CreateCharacterDialogComponent } from './tool/create-character-dialog/create-character-dialog.component';
+
 import { MissionComponent } from './pages/mission/mission.component';
 import { DataComponent } from './pages/data/data.component';
 import { MapComponent } from './pages/map/map.component';
@@ -25,6 +28,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -41,6 +45,8 @@ import { MatInputModule } from '@angular/material/input';
     RadioComponent,
     ModifyRuleDialogComponent,
     CreateRuleDialogComponent,
+    CreateTeamDialogComponent,
+    CreateCharacterDialogComponent,
 
   ],
   imports: [
@@ -55,7 +61,8 @@ import { MatInputModule } from '@angular/material/input';
     MatDialogModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

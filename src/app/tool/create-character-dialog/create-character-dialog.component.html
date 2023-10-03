@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Créer un nouveau personnage</h2>
+
+<mat-dialog-content [formGroup]="form">
+
+    <mat-form-field>
+      <input matInput placeholder="Nom du personnage" formControlName="pseudo">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Mot de passe" formControlName="password">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select matNativeControl placeholder="Equipe" formControlName="team">
+        <mat-option *ngFor="let team of data" [value]="team.name">
+          {{team.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button"(click)="close()">Close</button>
+    <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
+</mat-dialog-actions>

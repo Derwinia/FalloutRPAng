@@ -25,14 +25,11 @@ export class RuleService {
     return this._http.get<RuleModel[]>(environment.base_url + '/Rule/List-Rule');
   }
 
-  modifyRule(rule : RuleOrderModel){
-    if(rule){
+  modifyRule(rule : RuleUpdateModel){
     this._http.patch(environment.base_url + '/Rule/Update-Rule', rule).subscribe();
-    }
   }
 
   modifyRuleOrder(rules : RuleOrderModel){
-    console.log(rules)
     this._http.patch(environment.base_url + '/Rule/Update-Rule-Order', rules).subscribe();
   }
 

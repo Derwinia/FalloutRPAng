@@ -19,7 +19,7 @@ export class RuleComponent {
 
   isLoading: boolean = false;
   rules! : RuleModel[];
-  player: PlayerModel = {token : "", pseudo : "superviseur", role : "admin"};
+  player: PlayerModel = {token : "", pseudo : "", role : ""};
   ruleOrder? : RuleOrderModel;
 
   constructor(
@@ -31,11 +31,11 @@ export class RuleComponent {
   ngOnInit(): void {
     this._ruleService.getRules().subscribe(x => this.rules = x)
 
-    // this._loginService.user$.subscribe({
-    //   next: player => {
-    //     this.player = player
-    //   }
-    // });
+    this._loginService.user$.subscribe({
+      next: player => {
+        this.player = player
+      }
+    });
   }
 
   create(){
@@ -52,7 +52,8 @@ export class RuleComponent {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    this.ruleOrder = { previousOrder : event.previousIndex, currentOrder : event.currentIndex}
+    this.ruleOrder = { previousOrder : event.previousIndex+1, currentOrder : event.currentIndex+1}
+    console.log(this.ruleOrder)
     this._ruleService.modifyRuleOrder(this.ruleOrder)
     moveItemInArray(this.rules, event.previousIndex, event.currentIndex);
   }
