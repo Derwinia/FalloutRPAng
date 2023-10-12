@@ -12,8 +12,9 @@
     <button (click)="createCharacter()">Créer un nouveau personnage</button>
   </div>
   <div>
+    <h3>Liste des équipes :</h3>
     <ul>
-      <li *ngFor="let team of teams" >{{team.name}}</li>
+      <li *ngFor="let team of teams" >{{team.name}} <button (click)="deleteTeam(team.name)">Supprimer</button></li>
     </ul>
   </div>
 </div>

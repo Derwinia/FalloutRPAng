@@ -5,6 +5,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { CharacterService } from 'src/app/services/character.service';
 import { CreateTeamDialogComponent } from 'src/app/tool/create-team-dialog/create-team-dialog.component';
 import { CreateCharacterDialogComponent } from 'src/app/tool/create-character-dialog/create-character-dialog.component';
+import { concatMap, finalize } from 'rxjs';
 
 @Component({
   templateUrl: './character.component.html',
@@ -12,6 +13,7 @@ import { CreateCharacterDialogComponent } from 'src/app/tool/create-character-di
 })
 export class CharacterComponent {
 
+  isLoading : boolean = false;
   player: PlayerModel = {token : "", pseudo : "", role : ""};
   teams! : TeamModel[];
 
@@ -22,13 +24,7 @@ export class CharacterComponent {
     ) { }
 
   ngOnInit(): void {
-    this._characterService.getTeams().subscribe(x => this.teams = x)
-
-    this._loginService.user$.subscribe({
-      next: player => {
-        this.player = player
-      }
-    });
+    this.getTeams();
   }
 
   createTeam(){
@@ -40,8 +36,31 @@ export class CharacterComponent {
     const dialogRef = this.dialog.open(CreateTeamDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
+
         data => this._characterService.createTeam(data)
     );
+  }
+
+  getTeams(){
+    this._characterService.getTeams().subscribe(x => this.teams = x)
+
+    this._loginService.user$.subscribe({
+      next: player => {
+        this.player = player
+      }
+    });
+  }
+
+  deleteTeam(team : string){
+    if(confirm("Tu es sûr de ce que tu fais Mathieu ? ")) {
+      this.isLoading = true;
+      this._characterService.deleteTeam(team).pipe(
+        concatMap(() => this._characterService.getTeams()),
+        finalize(() => this.isLoading = false)
+      ).subscribe({
+        next: response => this.teams = response
+      });
+    }
   }
 
   createCharacter(){

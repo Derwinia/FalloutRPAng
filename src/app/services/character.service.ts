@@ -17,15 +17,18 @@ export class CharacterService {
     private _http: HttpClient
   ) { }
 
-  createTeam(newTeam : string){
-    console.log(newTeam)
-    // if(newTeam){
-    //   this._http.post<void>(environment.base_url + '/Character/Create-Team', newTeam).subscribe();
-    // }
+  createTeam(newTeam : TeamModel){
+    if(newTeam){
+      this._http.post<void>(environment.base_url + '/Player/Create-Team', newTeam).subscribe();
+    }
   }
 
   getTeams(): Observable<TeamModel[]> {
     return this._http.get<TeamModel[]>(environment.base_url + '/Player/List-Team');
+  }
+
+  deleteTeam(team : string): Observable<void>{
+    return this._http.delete<void>(environment.base_url + '/player/Delete-Team/'+team);
   }
 
   createCharacter(newCharacter : PlayerModel){
@@ -35,8 +38,8 @@ export class CharacterService {
     // }
   }
 
-  getTeam(): Observable<string[]> {
-    return this._http.get<string[]>(environment.base_url + '/Character/List-Team');
+  getTeam(): Observable<TeamModel[]> {
+    return this._http.get<TeamModel[]>(environment.base_url + '/Character/List-Team');
   }
 
   getCharacters(): Observable<PlayerModel[]> {
