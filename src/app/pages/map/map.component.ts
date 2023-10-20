@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { PlayerModel } from 'src/app/models/player.model';
-import { LoginService } from 'src/app/services/login.service';
+import { PlayerService } from 'src/app/services/player.service';
 
 @Component({
   templateUrl: './map.component.html',
@@ -8,14 +8,14 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class MapComponent {
 
-  player: PlayerModel = {token : "", pseudo : "", role : ""};
+  player: PlayerModel = {token : "", pseudo : "", team : ""};
 
   constructor(
-    private _loginService: LoginService,
+    private _playerService: PlayerService,
     ) { }
 
     ngOnInit(): void {
-      this._loginService.user$.subscribe({
+      this._playerService.user$.subscribe({
         next: player => {
           this.player = player
         }

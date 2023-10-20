@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { MissionModel } from '../models/mission.model';
+import { MissionCreateModel, MissionGroupByTeamDTO, MissionModel } from '../models/mission.model';
 
 
 @Injectable({
@@ -15,7 +15,14 @@ export class MissionService {
     private _http: HttpClient
   ) { }
 
-  getRules(): Observable<MissionModel[]> {
-    return this._http.get<MissionModel[]>(environment.base_url + '/Mission/List')
+  createMission(newMission : MissionCreateModel){
+    if(newMission){
+      console.log(newMission)
+      //this._http.post<void>(environment.base_url + '/Mission/Mission-Create', newMission).subscribe();
+    }
+  }
+
+  getMissions(): Observable<MissionGroupByTeamDTO[]> {
+    return this._http.get<MissionGroupByTeamDTO[]>(environment.base_url + '/Mission/Mission-List-All')
   }
 }

@@ -1,6 +1,6 @@
 <div *ngIf="player.pseudo">
 
-  <div *ngIf="player.role =='admin'">
+  <div *ngIf="player.team =='admin'">
     <div id="createButton">
       <button (click)="create()">Rajouter une règle</button>
     </div>
@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <div *ngIf="player.role !='admin'">
+  <div *ngIf="player.team !='admin'">
     <ul>
       <li *ngFor="let rule of rules" >{{rule.name}} - {{rule.shortDescription}}</li>
     </ul>

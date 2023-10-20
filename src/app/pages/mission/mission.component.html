@@ -1,8 +1,19 @@
-<div *ngIf="player.pseudo">
+<div *ngIf="player.team =='admin'">
+  <div id="command">
+    <button (click)="createMission()">Créer une nouvelle mission</button>
+  </div>
+  <div>
+    <ul *ngFor="let team of teams">
+      <h2>{{team.team}}</h2>
+      <li *ngFor="let mission of team.missions">{{mission.name}} - {{mission.shortDescription}} - {{mission.Description}}</li>
+    </ul>
+  </div>
+</div>
+<!-- <div *ngIf="player.team !='admin'">
   <ul>
     <li *ngFor="let mission of Missions">{{mission.name}} - {{mission.shortDescription}}</li>
   </ul>
-</div>
+</div> -->
 <div *ngIf="!player.pseudo" id="connexionNeed">
   <p>Vous devez être connecté pour pouvoir accéder à cette page !</p>
   <button [routerLink]="['/home']" routerLinkActive="router-link-active" >Accueil</button>

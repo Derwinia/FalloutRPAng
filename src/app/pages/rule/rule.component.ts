@@ -5,11 +5,11 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 
 import { RuleModel, RuleOrderModel } from 'src/app/models/rule.model';
 import { RuleService } from 'src/app/services/rule.service';
-import { LoginService } from 'src/app/services/login.service';
 import { PlayerModel } from 'src/app/models/player.model';
 import { ModifyRuleDialogComponent } from 'src/app/tool/modify-rule-dialog/modify-rule-dialog.component';
 import { CreateRuleDialogComponent } from 'src/app/tool/create-rule-dialog/create-rule-dialog.component';
 import { concatMap, finalize } from 'rxjs';
+import { PlayerService } from 'src/app/services/player.service';
 
 @Component({
   templateUrl: './rule.component.html',
@@ -19,19 +19,19 @@ export class RuleComponent {
 
   isLoading: boolean = false;
   rules! : RuleModel[];
-  player: PlayerModel = {token : "", pseudo : "", role : ""};
+  player: PlayerModel = {token : "", pseudo : "", team : ""};
   ruleOrder? : RuleOrderModel;
 
   constructor(
     private _ruleService : RuleService,
-    private _loginService: LoginService,
+    private _playerService: PlayerService,
     private dialog : MatDialog,
     ) { }
 
   ngOnInit(): void {
     this._ruleService.getRules().subscribe(x => this.rules = x)
 
-    this._loginService.user$.subscribe({
+    this._playerService.user$.subscribe({
       next: player => {
         this.player = player
       }

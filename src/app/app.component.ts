@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from './services/login.service';
+import { PlayerService } from './services/player.service';
 
 @Component({
   selector: 'app-root',
@@ -12,10 +12,10 @@ export class AppComponent implements OnInit {
   user : any ={};
 
   constructor(
-    private _loginService : LoginService
+    private _playerService : PlayerService
   ) {}
   ngOnInit(): void {
-    this._loginService.user$.subscribe({
+    this._playerService.user$.subscribe({
       next: user => {
         this.isLogged = !!user.token;
         this.user = user

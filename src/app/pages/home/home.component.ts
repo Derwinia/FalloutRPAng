@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoginService } from 'src/app/services/login.service';
 import { PlayerModel } from 'src/app/models/player.model';
+import { PlayerService } from 'src/app/services/player.service';
 
 @Component({
   templateUrl: './home.component.html',
@@ -11,12 +11,12 @@ import { PlayerModel } from 'src/app/models/player.model';
 export class HomeComponent {
 
   fg!: FormGroup;
-  player: PlayerModel = {token : "", pseudo : "", role : ""};
+  player: PlayerModel = {token : "", pseudo : "", team : ""};
 
   constructor(
     private _router:Router,
     private _fb: FormBuilder,
-    private _loginService: LoginService,
+    private _playerService: PlayerService,
   ) { }
 
   ngOnInit(): void {
@@ -26,7 +26,7 @@ export class HomeComponent {
       password: [null, [Validators.required]]
     });
 
-    this._loginService.user$.subscribe({
+    this._playerService.user$.subscribe({
       next: player => {
         this.player = player
       }
@@ -37,12 +37,12 @@ export class HomeComponent {
   submit() {
     if(this.fg.invalid)
       return;
-    this._loginService.login(this.fg.value).subscribe({
+    this._playerService.login(this.fg.value).subscribe({
       next: () => this._router.navigate(['/home'])
     });
   }
 
   logout() {
-    this._loginService.logout();
+    this._playerService.logout();
   }
 }

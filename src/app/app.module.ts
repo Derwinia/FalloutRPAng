@@ -29,14 +29,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import { CreateMissionDialogComponent } from './tool/create-mission-dialog/create-mission-dialog.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     NavComponent,
-
+    HomeComponent,
     RuleComponent,
     CharacterComponent,
     MissionComponent,
@@ -47,6 +47,7 @@ import {MatSelectModule} from '@angular/material/select';
     CreateRuleDialogComponent,
     CreateTeamDialogComponent,
     CreateCharacterDialogComponent,
+    CreateMissionDialogComponent,
 
   ],
   imports: [

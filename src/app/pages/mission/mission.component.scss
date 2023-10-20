@@ -9,3 +9,17 @@
     font-size: 3vh;
   }
 }
+
+#command{
+  padding-top: 1vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  button{
+    padding: 2px;
+    margin: 2px;
+    font-size: 1.8vw;
+    height: 3vw;
+    width: 25vw;
+  }
+}

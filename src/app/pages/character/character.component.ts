@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PlayerModel, TeamModel } from 'src/app/models/player.model';
-import { LoginService } from 'src/app/services/login.service';
+import { PlayerService } from 'src/app/services/player.service';
 import { CharacterService } from 'src/app/services/character.service';
 import { CreateTeamDialogComponent } from 'src/app/tool/create-team-dialog/create-team-dialog.component';
 import { CreateCharacterDialogComponent } from 'src/app/tool/create-character-dialog/create-character-dialog.component';
@@ -14,17 +14,27 @@ import { concatMap, finalize } from 'rxjs';
 export class CharacterComponent {
 
   isLoading : boolean = false;
-  player: PlayerModel = {token : "", pseudo : "", role : ""};
+  player: PlayerModel = {token : "", pseudo : "", team : ""};
   teams! : TeamModel[];
+  players! : PlayerModel[];
 
   constructor(
-    private _loginService: LoginService,
+    private _playerService: PlayerService,
     private _characterService : CharacterService,
     private dialog : MatDialog,
     ) { }
 
   ngOnInit(): void {
-    this.getTeams();
+    this._playerService.user$.subscribe({
+      next: player => {
+        this.player = player
+      }
+    });
+
+    if(this.player.team == "admin"){
+      this.getTeams();
+      this.getPlayers();
+    }
   }
 
   createTeam(){
@@ -37,25 +47,19 @@ export class CharacterComponent {
 
     dialogRef.afterClosed().subscribe(
 
-        data => this._characterService.createTeam(data)
+        data => this._playerService.createTeam(data)
     );
   }
 
   getTeams(){
-    this._characterService.getTeams().subscribe(x => this.teams = x)
-
-    this._loginService.user$.subscribe({
-      next: player => {
-        this.player = player
-      }
-    });
+    this._playerService.getTeams().subscribe(x => this.teams = x)
   }
 
   deleteTeam(team : string){
     if(confirm("Tu es sûr de ce que tu fais Mathieu ? ")) {
       this.isLoading = true;
-      this._characterService.deleteTeam(team).pipe(
-        concatMap(() => this._characterService.getTeams()),
+      this._playerService.deleteTeam(team).pipe(
+        concatMap(() => this._playerService.getTeams()),
         finalize(() => this.isLoading = false)
       ).subscribe({
         next: response => this.teams = response
@@ -63,17 +67,20 @@ export class CharacterComponent {
     }
   }
 
-  createCharacter(){
+  createPlayer(){
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = this.teams;
-    console.log(dialogConfig.data)
     const dialogRef = this.dialog.open(CreateCharacterDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
-        data => this._characterService.createCharacter(data)
+        data => this._playerService.createPlayer(data)
     );
+  }
+
+  getPlayers(){
+    this._playerService.getPlayers().subscribe(x => this.players = x)
   }
 }

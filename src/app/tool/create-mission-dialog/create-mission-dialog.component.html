@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Créer une nouvelle mission</h2>
+
+<mat-dialog-content [formGroup]="form">
+
+  <mat-form-field>
+    <input matInput placeholder="Nom de la mission" formControlName="name">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Résumer de la mission" formControlName="shortDescription">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Description complète de la mission" formControlName="FullDescription">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Joueurs</mat-label>
+    <mat-select formControlName="joueurs" multiple>
+      <mat-option *ngFor="let joueur of joueurs" [value]="joueur">{{joueur}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button"(click)="close()">Close</button>
+    <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
+</mat-dialog-actions>

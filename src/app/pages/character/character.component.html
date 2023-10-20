@@ -1,4 +1,4 @@
-<div *ngIf="player.role !='admin'" id="characterContainer">
+<div *ngIf="player.team !='admin'" id="characterContainer">
   <img src=".\assets\images\FichePerso1.png">
   <img src=".\assets\images\FichePerso2.png">
   <img src=".\assets\images\FichePerso3.png">
@@ -6,15 +6,21 @@
 </div>
 
 
-<div *ngIf="player.role =='admin'">
+<div *ngIf="player.team =='admin'">
   <div id="command">
     <button (click)="createTeam()">Créer une nouvelle équipe</button>
-    <button (click)="createCharacter()">Créer un nouveau personnage</button>
+    <button (click)="createPlayer()">Créer un nouveau personnage</button>
   </div>
   <div>
     <h3>Liste des équipes :</h3>
     <ul>
       <li *ngFor="let team of teams" >{{team.name}} <button (click)="deleteTeam(team.name)">Supprimer</button></li>
+    </ul>
+  </div>
+  <div>
+    <h3>Liste des joueurs :</h3>
+    <ul>
+      <li *ngFor="let player of players" >{{player.pseudo}} - {{player.team}}</li>
     </ul>
   </div>
 </div>
