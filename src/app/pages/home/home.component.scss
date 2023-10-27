@@ -1,7 +1,53 @@
+#maintitleConnected{
+  height: 15%;
+  font-size: 3vh;
+  text-align: center;
+}
+#maintitleDisconnected{
+  margin-top: 5%;
+  height: 20%;
+  font-size: 3vh;
+  text-align: center;
+}
+
 #textintro{
-  height: 64vh;
+  height: 75%;
   overflow-y: scroll;
 }
+
+#connexion{
+  font-size: larger;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  form{
+    padding: 0;
+    margin: 0;
+  }
+  a{
+    margin-left: 1vh;
+    margin-right: 1vh;
+  }
+  input{
+    padding-top: 1vh;
+    height: 3vh;
+    width: 20vh;
+  }
+  button{
+    font-size: larger;
+    height: 6vh;
+    margin: 1vh 1vh 1vh 1vh;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+#disconnected{
+  margin-top: 1em;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 2vh;
@@ -22,32 +68,4 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(133, 206, 23);
-}
-
-
-#connexion{
-  font-size: 4vh;
-  height: 10vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  form{
-    padding: 0;
-    margin: 0;
-  }
-  a{
-    margin-left: 1vh;
-    margin-right: 1vh;
-  }
-  input{
-    padding-top: 1vh;
-    height: 3vh;
-    width: 20vh;
-  }
-  button{
-    font-size: 4vh;
-    height: 6vh;
-    margin: 1vh 1vh 1vh 1vh;
-  }
 }

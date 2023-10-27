@@ -1,4 +1,4 @@
-<div id="nav">
+<div id="nav" *ngIf="player.pseudo">
   <button [routerLink]="['/home']" routerLinkActive="router-link-active" >Home</button>
   <button [routerLink]="['/rule']" routerLinkActive="router-link-active" >Rules</button>
   <button [routerLink]="['/character']" routerLinkActive="router-link-active" >Character</button>

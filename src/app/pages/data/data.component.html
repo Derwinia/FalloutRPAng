@@ -1,4 +1,35 @@
-<p *ngIf="player.pseudo">data works!</p>
+<div *ngIf="player.pseudo" id="connected">
+  <div id="categories" *ngIf="!dataAreDisplay">
+    <button class="categorie" (click)="selectCategorie(1)">
+      Arme
+    </button>
+    <button class="categorie">
+      Armure
+    </button>
+    <button class="categorie">
+      Consommable
+    </button>
+    <button class="categorie">
+      Bric à Brac
+    </button>
+    <button class="categorie">
+      Rien
+    </button>
+    <button class="categorie">
+      Encore rien
+    </button>
+  </div>
+  <div id="listing" *ngIf="dataAreDisplay">
+    <button (click)="emptyList()">Revenir en arrière</button>
+    <ul>
+      <li *ngFor="let data of listData" >{{data.name}} - {{data.shortDescription}} - {{data.description}}</li>
+    </ul>
+  </div>
+  <!-- <div *ngIf="player.team =='admin'">
+  </div>
+  <div *ngIf="player.team !='admin'">
+  </div> -->
+</div>
 <div *ngIf="!player.pseudo" id="connexionNeed">
   <p>Vous devez être connecté pour pouvoir accéder à cette page !</p>
   <button [routerLink]="['/home']" routerLinkActive="router-link-active" >Accueil</button>

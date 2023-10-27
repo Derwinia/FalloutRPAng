@@ -1,3 +1,11 @@
+<div id="maintitleConnected" *ngIf="player.pseudo">
+  <h1>Pip-boys</h1>
+  <h2>E - 1.3</h2>
+</div>
+<div id="maintitleDisconnected" *ngIf="!player.pseudo">
+  <h1>Pip-boys</h1>
+  <h2>E - 1.3</h2>
+</div>
 <div id="textintro">
   <p>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ac pulvinar massa. Nulla quam nunc, ornare eu ligula sed, rutrum mattis odio. Nulla in ligula posuere, rhoncus tortor non, finibus est. Maecenas fermentum nisi a leo vestibulum, quis viverra risus consequat. Curabitur ut augue eget nisi viverra tempor eget vel mi. Aliquam a diam rhoncus, semper mauris in, aliquam lacus. Aenean facilisis nunc ut dapibus tristique. Fusce iaculis metus eget cursus gravida.
@@ -49,7 +57,7 @@
   </p>
 </div>
 <div id="connexion">
-  <p *ngIf="player.pseudo">Vous êtes connecté en tant que {{player.pseudo}} - {{player.team}} <button (click)="logout()">se deco</button></p>
+
   <form *ngIf="!player.pseudo" [formGroup]="fg" (ngSubmit)="submit()">
     <a>Pseudo :</a>
     <input type="text" formControlName="pseudo">
@@ -57,5 +65,8 @@
     <input type="password" formControlName="password">
     <button>Se connecter</button>
   </form>
+
+  <p id="disconnected" *ngIf="player.pseudo">Vous êtes connecté en tant que <wbr>{{player.pseudo}} - {{player.team}} <button (click)="logout()">se deco</button></p>
+
 </div>
 

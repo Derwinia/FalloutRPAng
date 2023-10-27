@@ -1,7 +1,7 @@
 export interface MissionModel {
   name : string,
   shortDescription : string,
-  Description : string,
+  description : string,
 }
 
 export interface MissionGroupByTeamDTO

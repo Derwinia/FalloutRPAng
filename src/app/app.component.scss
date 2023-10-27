@@ -20,24 +20,11 @@
 
 #maincontentframe{
   width: 80%;
+  min-width: 29em;
   height: 100vh;
 }
 
-#maintitle{
-  height: 16vh;
-  margin-top: 5vh;
-  text-align: center;
-}
-
-h1{
-  font-size: 12vh;
-}
-
-h2{
-  font-size: 2vh;
-}
-
 #contentframe{
-  height: 72vh;
+  height: 85%;
 }
 

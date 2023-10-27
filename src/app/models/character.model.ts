@@ -16,7 +16,6 @@ export interface CharacterModel {
   MaxWeight : number,
   Weight : number,
 
-
 // Foreign Keys
   Skills : SkillModel,
   BodyParts : BodyPartModel[],
