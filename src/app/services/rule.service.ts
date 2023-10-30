@@ -26,7 +26,9 @@ export class RuleService {
   }
 
   modifyRule(rule : RuleUpdateModel){
-    this._http.patch(environment.base_url + '/Rule/Rule-Update', rule).subscribe();
+    if(rule){
+      this._http.patch(environment.base_url + '/Rule/Rule-Update', rule).subscribe();
+    }
   }
 
   modifyRuleOrder(rules : RuleOrderModel){

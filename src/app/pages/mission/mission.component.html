@@ -1,11 +1,24 @@
 <div *ngIf="player.team =='admin'">
-  <div id="command">
-    <button (click)="createMission()">Créer une nouvelle mission</button>
-  </div>
   <div>
+    <table *ngFor="let team of teams">
+      <thead>
+        <tr>
+          <th><h2>{{team.team}}</h2></th>
+          <th><button (click)="createMission()">Créer une mission pour cette équipe</button></th>
+        </tr>
+    </thead>
+      <tbody>
+        <tr *ngFor="let mission of team.missions">
+          <td>{{mission.name}}</td>
+          <td>{{mission.shortDescription}}</td>
+          <td>{{mission.status}}</td>
+          <td><button (click)="detailMission(mission.id)">Détails</button></td>
+        </tr>
+      </tbody>
+    </table>
     <ul *ngFor="let team of teams">
-      <h2>{{team.team}}</h2>
-      <li *ngFor="let mission of team.missions">{{mission.name}} - {{mission.shortDescription}} - {{mission.description}}</li>
+      <h2>{{team.team}}</h2><button (click)="createMission()">Créer une mission pour cette équipe</button>
+      <li *ngFor="let mission of team.missions">{{mission.name}} - {{mission.shortDescription}} - {{mission.status}}</li>
     </ul>
   </div>
 </div>

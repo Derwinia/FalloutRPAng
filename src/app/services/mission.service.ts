@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { MissionCreateModel, MissionGroupByTeamDTO, MissionModel } from '../models/mission.model';
+import { MissionCreateModel, MissionGroupByTeamDTO, MissionModel} from '../models/mission.model';
 
 
 @Injectable({
@@ -22,7 +22,11 @@ export class MissionService {
     }
   }
 
-  getMissions(): Observable<MissionGroupByTeamDTO[]> {
+  getAllMissionsForAllTeam(): Observable<MissionGroupByTeamDTO[]> {
     return this._http.get<MissionGroupByTeamDTO[]>(environment.base_url + '/Mission/Mission-List-All')
+  }
+
+  getMissionDetail(id : number):Observable<MissionModel>{
+    return this._http.get<MissionModel>(environment.base_url + '/Mission/Mission-Detail')
   }
 }
