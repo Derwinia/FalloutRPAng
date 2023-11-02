@@ -1,7 +1,9 @@
 import { Component , Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { PlayerListFromATeam, TeamModel } from 'src/app/models/player.model';
+import { CharacterName } from 'src/app/models/character.model';
+import { TeamModel } from 'src/app/models/player.model';
+import { CharacterService } from 'src/app/services/character.service';
 
 @Component({
   selector: 'app-create-mission-dialog',
@@ -11,20 +13,20 @@ import { PlayerListFromATeam, TeamModel } from 'src/app/models/player.model';
 export class CreateMissionDialogComponent {
   form! : FormGroup;
   listTeam! : TeamModel[];
-  joueurs! : PlayerListFromATeam[];
+  joueurs! : CharacterName[];
 
   constructor(
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<CreateMissionDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: PlayerListFromATeam[]
+    @Inject(MAT_DIALOG_DATA) public data: CharacterName[]
   ){}
 
   ngOnInit() {
     this.form = this.formBuilder.group({
       name: [,[]],
       shortDescription:[,[]],
-      FullDescription:[this.data,[]],
-      joueurs:[this.data,[]],
+      description:[,[]],
+      concernedPlayers:[,[]],
     });
   }
 

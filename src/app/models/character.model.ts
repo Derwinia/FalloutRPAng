@@ -144,3 +144,8 @@ export interface EquipementModel {
   Weight : number,
   TotalWeight : number,
 }
+
+export interface CharacterName{
+  id : number,
+  name : string
+}

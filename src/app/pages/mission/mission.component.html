@@ -4,29 +4,30 @@
       <thead>
         <tr>
           <th><h2>{{team.team}}</h2></th>
-          <th><button (click)="createMission()">Créer une mission pour cette équipe</button></th>
+          <th><button (click)="createMission(team.team)">Créer une mission pour cette équipe</button></th>
         </tr>
-    </thead>
+      </thead>
       <tbody>
         <tr *ngFor="let mission of team.missions">
           <td>{{mission.name}}</td>
           <td>{{mission.shortDescription}}</td>
           <td>{{mission.status}}</td>
-          <td><button (click)="detailMission(mission.id)">Détails</button></td>
+          <td><button (click)="modifyMission(mission)">Voir les détails</button></td>
         </tr>
       </tbody>
     </table>
-    <ul *ngFor="let team of teams">
-      <h2>{{team.team}}</h2><button (click)="createMission()">Créer une mission pour cette équipe</button>
-      <li *ngFor="let mission of team.missions">{{mission.name}} - {{mission.shortDescription}} - {{mission.status}}</li>
+  </div>
+</div>
+
+<div *ngIf="player.team !='admin'">
+  <div>
+    <ul>
+      <li *ngFor="let mission of missions">
+        {{mission.name}} - {{mission.status}} - {{mission.shortDescription}}
+      </li>
     </ul>
   </div>
 </div>
-<!-- <div *ngIf="player.team !='admin'">
-  <ul>
-    <li *ngFor="let mission of Missions">{{mission.name}} - {{mission.shortDescription}}</li>
-  </ul>
-</div> -->
 <div *ngIf="!player.pseudo" id="connexionNeed">
   <p>Vous devez être connecté pour pouvoir accéder à cette page !</p>
   <button [routerLink]="['/home']" routerLinkActive="router-link-active" >Accueil</button>

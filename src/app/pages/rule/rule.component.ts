@@ -38,7 +38,7 @@ export class RuleComponent {
     });
   }
 
-  create(){
+  createRule(){
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
@@ -58,7 +58,7 @@ export class RuleComponent {
     moveItemInArray(this.rules, event.previousIndex, event.currentIndex);
   }
 
-  modify(rule : RuleModel){
+  modifyRule(rule : RuleModel){
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;

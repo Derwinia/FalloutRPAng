@@ -1,10 +1,12 @@
+import { CharacterName } from "./character.model";
+
 export interface MissionModel {
   id : number,
   name : string,
   shortDescription : string,
   description : string,
   status : string,
-  concernedPlayer : number[];
+  concernedPlayer : CharacterName[];
 }
 
 export interface MissionCreateModel {
@@ -14,25 +16,18 @@ export interface MissionCreateModel {
   concernedPlayer : number[];
 }
 
-export interface MissionGroupByTeamDTO
-{
-  team : string,
-  missions : MissionSimpleDTO[]
-}
-
-export interface MissionSimpleDTO{
-  id : number,
-  name : string,
-  shortDescription : string,
-  status : string,
-}
-
-export interface MissionDetailDTO{
+export interface MissionForPlayerModel{
   id : number,
   name : string,
   shortDescription : string,
   description : string,
   status : string,
+}
+
+export interface MissionGroupByTeamModel
+{
+  team : string,
+  missions : MissionModel[]
 }
 
 

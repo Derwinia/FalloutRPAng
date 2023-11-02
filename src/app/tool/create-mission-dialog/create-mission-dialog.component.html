@@ -9,15 +9,14 @@
     <input matInput placeholder="Résumer de la mission" formControlName="shortDescription">
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Description complète de la mission" formControlName="FullDescription">
+    <input matInput placeholder="Description complète de la mission" formControlName="description">
   </mat-form-field>
   <mat-form-field>
     <mat-label>Joueurs</mat-label>
-    <mat-select formControlName="joueurs" multiple>
-      <mat-option *ngFor="let joueur of joueurs" [value]="joueur">{{joueur}}</mat-option>
+    <mat-select formControlName="concernedPlayers" multiple>
+      <mat-option *ngFor="let joueur of data" [value]="joueur">{{joueur.name}}</mat-option>
     </mat-select>
   </mat-form-field>
-
 </mat-dialog-content>
 
 <mat-dialog-actions>

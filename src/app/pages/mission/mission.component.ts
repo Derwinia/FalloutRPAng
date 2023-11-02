@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { MissionGroupByTeamDTO} from 'src/app/models/mission.model';
+import { CharacterName } from 'src/app/models/character.model';
+import { MissionModel, MissionForPlayerModel, MissionGroupByTeamModel} from 'src/app/models/mission.model';
 import { PlayerModel } from 'src/app/models/player.model';
+import { CharacterService } from 'src/app/services/character.service';
 import { MissionService } from 'src/app/services/mission.service';
 import { PlayerService } from 'src/app/services/player.service';
 import { CreateMissionDialogComponent } from 'src/app/tool/create-mission-dialog/create-mission-dialog.component';
-import { DetailMissionDialogComponent } from 'src/app/tool/detail-mission-dialog/detail-mission-dialog.component';
+import { ModifyMissionDialogComponent } from 'src/app/tool/modify-mission-dialog/modify-mission-dialog.component';
 
 @Component({
   templateUrl: './mission.component.html',
@@ -13,11 +15,14 @@ import { DetailMissionDialogComponent } from 'src/app/tool/detail-mission-dialog
 })
 export class MissionComponent {
 
-  teams! : MissionGroupByTeamDTO[];
+  missions! : MissionForPlayerModel[];
+  teams! : MissionGroupByTeamModel[];
+  characters! : CharacterName[];
 
   player: PlayerModel = {token : "", pseudo : "", team : ""};
 
   constructor(
+    private _characterService : CharacterService,
     private _playerService: PlayerService,
     private _missionService : MissionService,
     private dialog : MatDialog,
@@ -30,38 +35,52 @@ export class MissionComponent {
       }
     });
 
-    if(this.player.team == "admin"){
-      this.getAllMission()
+    if(this.player.token){
+      if(this.player.team == "admin"){
+        this.getAllMission()
+      }
+      else{
+        this.getMissionForOnePlayer(this.player.pseudo)
+      }
     }
+
   }
 
-  createMission(){
-    const dialogConfig = new MatDialogConfig();
+  createMission(team : string){
 
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
+    this._characterService.CharacterListForATeam(team).subscribe(x => {
+      this.characters = x
 
-    const dialogRef = this.dialog.open(CreateMissionDialogComponent, dialogConfig);
+      const dialogConfig = new MatDialogConfig();
 
-    dialogRef.afterClosed().subscribe(
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = this.characters;
 
-        data => this._missionService.createMission(data)
-    );
-  }
+      const dialogRef = this.dialog.open(CreateMissionDialogComponent, dialogConfig);
 
-  detailMission(id : number){
-    this._missionService.getMissionDetail(id)
-
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.data = id;
-
-    const dialogRef = this.dialog.open(DetailMissionDialogComponent, dialogConfig);
+      dialogRef.afterClosed().subscribe(data => {
+        console.log(data)
+        this._missionService.createMission(data)
+      });
+    });
   }
 
   getAllMission(){
     this._missionService.getAllMissionsForAllTeam().subscribe(x => this.teams = x)
+  }
+
+  getMissionForOnePlayer(pseudo : string){
+    this._missionService.getMissionForOnePlayer(pseudo).subscribe(x => this.missions = x)
+  }
+
+  modifyMission(mission : MissionModel){
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = mission;
+
+    const dialogRef = this.dialog.open(ModifyMissionDialogComponent, dialogConfig);
   }
 }

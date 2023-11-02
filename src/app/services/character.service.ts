@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-import { CharacterModel } from '../models/character.model';
+import { CharacterModel, CharacterName } from '../models/character.model';
 
 
 @Injectable({
@@ -18,6 +18,10 @@ export class CharacterService {
 
   getCharacters(): Observable<CharacterModel[]> {
     return this._http.get<CharacterModel[]>(environment.base_url + '/Character/Character-List');
+  }
+
+  CharacterListForATeam(teamName : string): Observable<CharacterName[]>{
+    return this._http.get<CharacterName[]>(environment.base_url + '/Character/Character-List-For-A-Team/'+teamName)
   }
 
 }

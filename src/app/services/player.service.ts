@@ -15,7 +15,7 @@ import jwtDecode from 'jwt-decode';
 export class PlayerService {
 
   private defaultPlayer = {
-    token: "null",
+    token: "test",
     pseudo: "superviseur",
     team: "admin",
   }

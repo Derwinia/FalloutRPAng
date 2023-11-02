@@ -15,6 +15,9 @@ import { CharacterComponent } from './pages/character/character.component';
 import { CreateTeamDialogComponent } from './tool/create-team-dialog/create-team-dialog.component';
 import { CreateCharacterDialogComponent } from './tool/create-character-dialog/create-character-dialog.component';
 
+import { CreateMissionDialogComponent } from './tool/create-mission-dialog/create-mission-dialog.component';
+import { ModifyMissionDialogComponent } from './tool/modify-mission-dialog/modify-mission-dialog.component';
+
 import { MissionComponent } from './pages/mission/mission.component';
 import { DataComponent } from './pages/data/data.component';
 import { MapComponent } from './pages/map/map.component';
@@ -29,9 +32,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
-import { CreateMissionDialogComponent } from './tool/create-mission-dialog/create-mission-dialog.component';
-import { DetailMissionDialogComponent } from './tool/detail-mission-dialog/detail-mission-dialog.component';
-
 
 @NgModule({
   declarations: [
@@ -44,12 +44,12 @@ import { DetailMissionDialogComponent } from './tool/detail-mission-dialog/detai
     DataComponent,
     MapComponent,
     RadioComponent,
-    ModifyRuleDialogComponent,
     CreateRuleDialogComponent,
+    ModifyRuleDialogComponent,
     CreateTeamDialogComponent,
     CreateCharacterDialogComponent,
     CreateMissionDialogComponent,
-    DetailMissionDialogComponent,
+    ModifyMissionDialogComponent,
 
   ],
   imports: [

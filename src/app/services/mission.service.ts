@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { MissionCreateModel, MissionGroupByTeamDTO, MissionModel} from '../models/mission.model';
+import { MissionCreateModel, MissionForPlayerModel, MissionGroupByTeamModel, MissionModel} from '../models/mission.model';
 
 
 @Injectable({
@@ -11,19 +11,25 @@ import { MissionCreateModel, MissionGroupByTeamDTO, MissionModel} from '../model
 })
 export class MissionService {
 
+  newMissionFormat! : MissionCreateModel;
+  listConcernedPlayer! : number[]
+
   constructor(
     private _http: HttpClient
   ) { }
 
   createMission(newMission : MissionCreateModel){
     if(newMission){
-      console.log(newMission)
-      //this._http.post<void>(environment.base_url + '/Mission/Mission-Create', newMission).subscribe();
+      this._http.post<void>(environment.base_url + '/Mission/Mission-Create', newMission).subscribe();
     }
   }
 
-  getAllMissionsForAllTeam(): Observable<MissionGroupByTeamDTO[]> {
-    return this._http.get<MissionGroupByTeamDTO[]>(environment.base_url + '/Mission/Mission-List-All')
+  getAllMissionsForAllTeam(): Observable<MissionGroupByTeamModel[]> {
+    return this._http.get<MissionGroupByTeamModel[]>(environment.base_url + '/Mission/Mission-List-All')
+  }
+
+  getMissionForOnePlayer(pseudo : string): Observable<MissionForPlayerModel[]> {
+    return this._http.get<MissionForPlayerModel[]>(environment.base_url + '/Mission/Mission-List-All')
   }
 
   getMissionDetail(id : number):Observable<MissionModel>{

@@ -10,10 +10,6 @@ export interface CreatePlayerModel{
   team : string,
 }
 
-export interface PlayerListFromATeam{
-  name : string,
-}
-
 export interface TeamModel{
   name : string
 }
