@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
@@ -29,13 +29,29 @@ export class RuleComponent {
     ) { }
 
   ngOnInit(): void {
-    this._ruleService.getRules().subscribe(x => this.rules = x)
-
+    this._ruleService.data$.subscribe((data) => {
+      this.rules = data;
+    });
+    if(!this.rules){
+      this._ruleService.setPath('ElementaryRule')
+    }
     this._playerService.user$.subscribe({
       next: player => {
         this.player = player
       }
     });
+  }
+
+  setPath(path : string){
+    this._ruleService.setPath(path);
+  }
+
+  furtherPath(path : string){
+    this._ruleService.furtherPath(path);
+  }
+
+  previousPath(){
+    this._ruleService.previousPath();
   }
 
   createRule(){

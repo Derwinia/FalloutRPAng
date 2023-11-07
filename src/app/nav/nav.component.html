@@ -1,9 +1,35 @@
-<div id="nav" *ngIf="player.pseudo">
-  <button [routerLink]="['/home']" routerLinkActive="router-link-active" >Home</button>
-  <button [routerLink]="['/rule']" routerLinkActive="router-link-active" >Rules</button>
-  <button [routerLink]="['/character']" routerLinkActive="router-link-active" >Character</button>
-  <button [routerLink]="['/mission']" routerLinkActive="router-link-active" >Mission</button>
-  <button [routerLink]="['/data']" routerLinkActive="router-link-active" >Data</button>
-  <button [routerLink]="['/map']" routerLinkActive="router-link-active" >Map</button>
-  <button [routerLink]="['/radio']" routerLinkActive="router-link-active" >Radio</button>
-</div>
+<!-- <nav id="nav" *ngIf="player.pseudo">
+  <ul>
+    <li><button [routerLink]="['/home']" routerLinkActive="router-link-active" >Home</button></li>
+    <li class="deroulant">
+      <button>Rules</button>
+      <ul class="sous">
+        <li><button [routerLink]="['/rule']" routerLinkActive="router-link-active" >Rules</button></li>
+        <li><button [routerLink]="['/rule']" routerLinkActive="router-link-active" >Rules</button></li>
+        <li><button [routerLink]="['/rule']" routerLinkActive="router-link-active" >Rules</button></li>
+      </ul>
+    </li>
+    <li><button [routerLink]="['/character']" routerLinkActive="router-link-active" >Personnages</button></li>
+    <li><button [routerLink]="['/mission']" routerLinkActive="router-link-active" >Mission</button></li>
+    <li><button [routerLink]="['/data']" routerLinkActive="router-link-active" >Data</button></li>
+    <li><button [routerLink]="['/map']" routerLinkActive="router-link-active" >Map</button></li>
+    <li><button [routerLink]="['/radio']" routerLinkActive="router-link-active" >Radio</button></li>
+</ul>
+</nav> -->
+<nav>
+  <ul>
+    <li><a [routerLink]="['/home']" routerLinkActive="router-link-active" >Accueil</a></li>
+    <li class="deroulant"><a>Règles</a>
+      <ul class="sous">
+        <li><a [routerLink]="['/rule']" routerLinkActive="router-link-active" (click)="setPath('ElementaryRule')">Règles élémentaires</a></li>
+        <li><a [routerLink]="['/rule']" routerLinkActive="router-link-active" (click)="setPath('AppliedRule')">Règles en application</a></li>
+        <li><a [routerLink]="['/rule']" routerLinkActive="router-link-active" (click)="setPath('Equipement')">Equipement</a></li>
+      </ul>
+    </li>
+    <li><a [routerLink]="['/character']" routerLinkActive="router-link-active">Character</a></li>
+    <li><a [routerLink]="['/mission']" routerLinkActive="router-link-active" >Mission</a></li>
+    <li><a [routerLink]="['/data']" routerLinkActive="router-link-active" >Data</a></li>
+    <li><a [routerLink]="['/map']" routerLinkActive="router-link-active" >Map</a></li>
+    <li><a [routerLink]="['/radio']" routerLinkActive="router-link-active" >Radio</a></li>
+  </ul>
+</nav>

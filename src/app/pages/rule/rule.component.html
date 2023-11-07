@@ -4,10 +4,12 @@
     <div id="createButton">
       <button (click)="createRule()">Rajouter une règle</button>
     </div>
+    <button (click)="previousPath()">Revenir en arrière</button>
     <div cdkDropList class="ruleslist" (cdkDropListDropped)="drop($event)">
       <div class="rulesbox" *ngFor="let rule of rules" cdkDrag>
         <a id="ruletitle">{{rule.name}}</a><a id="ruledescription">{{rule.shortDescription}}</a>
-        <button (click)="modifyRule(rule)">Voir les détails</button>
+        <button *ngIf="rule.isFolder" (click)="furtherPath(rule.shortDescription)">Accéder aux données</button>
+        <button *ngIf="rule.description" (click)="modifyRule(rule)">Voir les détails</button>
         <button (click)="delete(rule.id)">Supprimer</button>
       </div>
     </div>

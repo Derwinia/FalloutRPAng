@@ -1,9 +1,10 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { Observable, Subject} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { RuleCreateModel, RuleModel , RuleOrderModel, RuleUpdateModel} from '../models/rule.model';
+import { RuleComponent } from '../pages/rule/rule.component';
 
 
 @Injectable({
@@ -11,9 +12,48 @@ import { RuleCreateModel, RuleModel , RuleOrderModel, RuleUpdateModel} from '../
 })
 export class RuleService {
 
+  private actualPath! : string;
+  private realPath! : string;
+  private tempPath! : string[];
+
+  private dataSubject = new Subject<RuleModel[]>();
+  data$ = this.dataSubject.asObservable();
+
   constructor(
     private _http: HttpClient
   ) { }
+
+  setPath(path : string){
+    this.actualPath = path
+    this.realPath = path
+    this.getRulesFromPath().subscribe(x => this.sendData(x));
+  }
+
+  furtherPath(path : string){
+    this.actualPath = path
+    this.realPath = this.realPath+'/'+path
+    this.getRulesFromPath().subscribe(x => this.sendData(x));
+  }
+
+  previousPath(){
+    this.tempPath = this.realPath.split('/')
+    this.realPath = this.tempPath[0]
+    for(let i=1; i<this.tempPath.length-1; i++){
+      this.realPath = this.realPath+'/'+this.tempPath[i]
+    }
+    this.actualPath = this.tempPath[this.tempPath.length-2]
+    console.log(this.actualPath)
+    console.log(this.realPath)
+    this.getRulesFromPath().subscribe(x => this.sendData(x));
+  }
+
+  private getRulesFromPath(): Observable<RuleModel[]> {
+    return this._http.get<RuleModel[]>(environment.base_url + '/Rule/Rule-From-Path/'+ this.actualPath);
+  }
+
+  sendData(data: RuleModel[]) {
+    this.dataSubject.next(data);
+  }
 
   createRule(newRule : RuleCreateModel){
     if(newRule){

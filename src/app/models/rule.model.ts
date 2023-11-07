@@ -10,6 +10,8 @@ export interface RuleModel {
   name : string,
   shortDescription : string,
   description : string,
+  path : string,
+  isFolder : boolean
 }
 
 export interface RuleUpdateModel {
