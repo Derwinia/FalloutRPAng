@@ -31,7 +31,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { CreateFolderRuleDialogComponent } from './tool/create-folder-rule-dialog/create-folder-rule-dialog.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import {MatSelectModule} from '@angular/material/select';
     CreateCharacterDialogComponent,
     CreateMissionDialogComponent,
     ModifyMissionDialogComponent,
+    CreateFolderRuleDialogComponent,
 
   ],
   imports: [
@@ -66,6 +69,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -7,15 +7,11 @@
   mat-form-field{
     width: 75vw;
     textarea{
-      height: 25vh !important;
+      height: 19vh !important;
     }
-    input{
-      height: 3vh !important;
-    }
-  }
-
-  h2{
-    font-size: 3vh;
+    // .mdc-filled-text-field-caret-color{
+    //   color: aqua;
+    // }
   }
 
   button{

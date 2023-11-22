@@ -1,18 +1,37 @@
-#createButton{
+#actionButton{
   width: 100%;
   display: flex;
   justify-content: center;
   button{
     padding: 2px;
     font-size: 2vw;
-    height: 3vw;
+    height: 5vh;
     width: 18vw;
   }
 }
 
+#nopath{
+  display: flex;
+  justify-content: space-around;
+  button{
+    padding: 2px;
+    font-size: 2vw;
+    height: 10vh;
+    width: 20vw;
+    margin-top: 30vh;
+  }
+}
+
+#previousButton{
+  padding: 2px;
+  font-size: 1.5vw;
+  height: 5vh;
+  width: 15vw;
+}
+
 .ruleslist {
   width: 100%;
-  max-height: 650px;
+  height: 70vh;
   display: block;
   border-radius: 4px;
   overflow-y: scroll;
@@ -80,7 +99,7 @@
 
 /* width */
 ::-webkit-scrollbar {
-  width: 2vh;
+  width: 1vw;
 }
 
 /* Track */

@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable, Subject} from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { RuleCreateModel, RuleModel , RuleOrderModel, RuleUpdateModel} from '../models/rule.model';
-import { RuleComponent } from '../pages/rule/rule.component';
+import { RuleCreateModel, RuleFolderCreateModel, RuleModel , RuleOrderModel, RuleUpdateModel} from '../models/rule.model';
 
 
 @Injectable({
@@ -23,6 +22,10 @@ export class RuleService {
     private _http: HttpClient
   ) { }
 
+  getPath():string{
+    return this.actualPath
+  }
+
   setPath(path : string){
     this.actualPath = path
     this.realPath = path
@@ -35,8 +38,11 @@ export class RuleService {
     this.getRulesFromPath().subscribe(x => this.sendData(x));
   }
 
-  previousPath(){
+  previousPath():boolean{
     this.tempPath = this.realPath.split('/')
+    if(this.tempPath.length == 1){
+      return false
+    }
     this.realPath = this.tempPath[0]
     for(let i=1; i<this.tempPath.length-1; i++){
       this.realPath = this.realPath+'/'+this.tempPath[i]
@@ -45,6 +51,7 @@ export class RuleService {
     console.log(this.actualPath)
     console.log(this.realPath)
     this.getRulesFromPath().subscribe(x => this.sendData(x));
+    return true
   }
 
   private getRulesFromPath(): Observable<RuleModel[]> {
@@ -58,6 +65,12 @@ export class RuleService {
   createRule(newRule : RuleCreateModel){
     if(newRule){
       this._http.post<void>(environment.base_url + '/Rule/Rule-Create', newRule).subscribe();
+    }
+  }
+
+  createFolderRule(newFolderRule : RuleFolderCreateModel){
+    if(newFolderRule){
+      this._http.post<void>(environment.base_url + '/Rule/Rule-Folder-Create', newFolderRule).subscribe();
     }
   }
 

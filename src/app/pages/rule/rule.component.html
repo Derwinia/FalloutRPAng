@@ -1,26 +1,34 @@
 <div *ngIf="player.pseudo">
-
-  <div *ngIf="player.team =='admin'">
-    <div id="createButton">
-      <button (click)="createRule()">Rajouter une règle</button>
-    </div>
-    <button (click)="previousPath()">Revenir en arrière</button>
-    <div cdkDropList class="ruleslist" (cdkDropListDropped)="drop($event)">
-      <div class="rulesbox" *ngFor="let rule of rules" cdkDrag>
-        <a id="ruletitle">{{rule.name}}</a><a id="ruledescription">{{rule.shortDescription}}</a>
-        <button *ngIf="rule.isFolder" (click)="furtherPath(rule.shortDescription)">Accéder aux données</button>
-        <button *ngIf="rule.description" (click)="modifyRule(rule)">Voir les détails</button>
-        <button (click)="delete(rule.id)">Supprimer</button>
+  <div *ngIf="rules.length != 0">
+    <div *ngIf="player.team =='admin'">
+      <div id="actionButton">
+        <button (click)="createRule()">Rajouter une règle</button>
+        <button (click)="createFolderRule()">Rajouter un dossier</button>
       </div>
     </div>
-  </div>
+    <button id="previousButton" (click)="previousPath()">Revenir en arrière</button>
+    <div *ngIf="player.team =='admin'">
+      <div cdkDropList class="ruleslist" (cdkDropListDropped)="drop($event)">
+        <div class="rulesbox" *ngFor="let rule of rules" cdkDrag>
+          <a id="ruletitle">{{rule.name}}</a><a id="ruledescription">{{rule.shortDescription}}</a>
+          <button *ngIf="rule.isFolder" (click)="furtherPath(rule.shortDescription)">Accéder aux données</button>
+          <button *ngIf="rule.description" (click)="modifyRule(rule)">Voir les détails</button>
+          <button (click)="delete(rule.id)">Supprimer</button>
+        </div>
+      </div>
+    </div>
 
-  <div *ngIf="player.team !='admin'">
-    <ul>
-      <li *ngFor="let rule of rules" >{{rule.name}} - {{rule.shortDescription}}</li>
-    </ul>
+    <div *ngIf="player.team !='admin'">
+      <ul>
+        <li *ngFor="let rule of rules" >{{rule.name}} - {{rule.shortDescription}}</li>
+      </ul>
+    </div>
   </div>
-
+  <div id="nopath" *ngIf="rules.length == 0">
+    <button (click)="setPath('ElementaryRule')">Règles élémentaires</button>
+    <button (click)="setPath('AppliedRule')">Règles en application</button>
+    <button (click)="setPath('Equipement')">Equipement</button>
+  </div>
 </div>
 
 <div *ngIf="!player.pseudo" id="connexionNeed">

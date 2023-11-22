@@ -5,11 +5,12 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 
 import { RuleModel, RuleOrderModel } from 'src/app/models/rule.model';
 import { RuleService } from 'src/app/services/rule.service';
+import { PlayerService } from 'src/app/services/player.service';
 import { PlayerModel } from 'src/app/models/player.model';
 import { ModifyRuleDialogComponent } from 'src/app/tool/modify-rule-dialog/modify-rule-dialog.component';
 import { CreateRuleDialogComponent } from 'src/app/tool/create-rule-dialog/create-rule-dialog.component';
+import { CreateFolderRuleDialogComponent } from 'src/app/tool/create-folder-rule-dialog/create-folder-rule-dialog.component';
 import { concatMap, finalize } from 'rxjs';
-import { PlayerService } from 'src/app/services/player.service';
 
 @Component({
   templateUrl: './rule.component.html',
@@ -18,24 +19,21 @@ import { PlayerService } from 'src/app/services/player.service';
 export class RuleComponent {
 
   isLoading: boolean = false;
-  rules! : RuleModel[];
+  rules : RuleModel[] = [];
   player: PlayerModel = {token : "", pseudo : "", team : ""};
   ruleOrder? : RuleOrderModel;
 
   constructor(
-    private _ruleService : RuleService,
-    private _playerService: PlayerService,
+    private ruleService : RuleService,
+    private playerService: PlayerService,
     private dialog : MatDialog,
     ) { }
 
   ngOnInit(): void {
-    this._ruleService.data$.subscribe((data) => {
+    this.ruleService.data$.subscribe((data) => {
       this.rules = data;
     });
-    if(!this.rules){
-      this._ruleService.setPath('ElementaryRule')
-    }
-    this._playerService.user$.subscribe({
+    this.playerService.user$.subscribe({
       next: player => {
         this.player = player
       }
@@ -43,15 +41,17 @@ export class RuleComponent {
   }
 
   setPath(path : string){
-    this._ruleService.setPath(path);
+    this.ruleService.setPath(path);
   }
 
   furtherPath(path : string){
-    this._ruleService.furtherPath(path);
+    this.ruleService.furtherPath(path);
   }
 
   previousPath(){
-    this._ruleService.previousPath();
+    if(!this.ruleService.previousPath()){
+      this.rules = [];
+    }
   }
 
   createRule(){
@@ -59,18 +59,33 @@ export class RuleComponent {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.data = this.ruleService.getPath();
 
     const dialogRef = this.dialog.open(CreateRuleDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
-        data => this._ruleService.createRule(data)
+        data => this.ruleService.createRule(data)
+    );
+  }
+
+  createFolderRule(){
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = this.ruleService.getPath();
+
+    const dialogRef = this.dialog.open(CreateFolderRuleDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+        data => this.ruleService.createFolderRule(data)
     );
   }
 
   drop(event: CdkDragDrop<string[]>) {
     this.ruleOrder = { previousOrder : event.previousIndex+1, currentOrder : event.currentIndex+1}
     console.log(this.ruleOrder)
-    this._ruleService.modifyRuleOrder(this.ruleOrder)
+    this.ruleService.modifyRuleOrder(this.ruleOrder)
     moveItemInArray(this.rules, event.previousIndex, event.currentIndex);
   }
 
@@ -84,15 +99,15 @@ export class RuleComponent {
     const dialogRef = this.dialog.open(ModifyRuleDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
-        data => this._ruleService.modifyRule(data)
+        data => this.ruleService.modifyRule(data)
     );
   }
 
   delete(id: number) {
     if(confirm("Tu es sûr de ce que tu fais Mathieu ? ")) {
       this.isLoading = true;
-      this._ruleService.deleteRule(id.toString()).pipe(
-        concatMap(() => this._ruleService.getRules()),
+      this.ruleService.deleteRule(id.toString()).pipe(
+        concatMap(() => this.ruleService.getRules()),
         finalize(() => this.isLoading = false)
       ).subscribe({
         next: response => this.rules = response

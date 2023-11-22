@@ -4,6 +4,11 @@ export interface RuleCreateModel {
   description : string,
 }
 
+export interface RuleFolderCreateModel {
+  name : string,
+  shortDescription : string,
+}
+
 export interface RuleModel {
   id : number,
   order : number,

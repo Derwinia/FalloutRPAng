@@ -2,13 +2,10 @@
 
 <mat-dialog-content [formGroup]="form">
   <mat-form-field>
-    <input matInput placeholder="Name" formControlName="name">
+    <input matInput placeholder="Nom du dossier" formControlName="name">
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="ShortDescription" formControlName="shortDescription" id="mon-dialog">
-  </mat-form-field>
-  <mat-form-field>
-    <textarea matInput placeholder="Description" formControlName="description"></textarea>
+    <input matInput placeholder="Lien du dossier !!! utilise 1 seul mot, qui servira uniquement pour la base de donnée !!!" formControlName="shortDescription" id="mon-dialog">
   </mat-form-field>
 </mat-dialog-content>
 

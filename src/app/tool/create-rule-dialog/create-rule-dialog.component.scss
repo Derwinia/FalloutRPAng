@@ -5,15 +5,13 @@
   width: 80vw;
   height: 80vh;
   mat-form-field{
-
-    height: 20vh;
     width: 75vw;
     textarea{
-      height: 15vh !important;
+      height: 40vh !important;
     }
-    .mdc-filled-text-field-caret-color{
-      color: aqua;
-    }
+    // .mdc-filled-text-field-caret-color{
+    //   color: aqua;
+    // }
   }
 
   button{
