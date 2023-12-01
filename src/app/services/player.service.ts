@@ -16,8 +16,8 @@ export class PlayerService {
 
   private defaultPlayer = {
     token: "test",
-    pseudo: "superviseur",
-    team: "admin",
+    pseudo: "player1",
+    team: "team1",
   }
   private nullPlayer = {
     token: "",

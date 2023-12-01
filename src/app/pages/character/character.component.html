@@ -1,8 +1,175 @@
 <div *ngIf="player.team !='admin'" id="characterContainer">
-  <img src=".\assets\images\FichePerso1.png">
-  <img src=".\assets\images\FichePerso2.png">
-  <img src=".\assets\images\FichePerso3.png">
-  <img src=".\assets\images\FichePerso4.png">
+  <div id="menuPanel">
+    <button (click)="activePanel = 1">Caractèristiques generales</button>
+    <button (click)="activePanel = 2">État / armes / armures</button>
+    <button (click)="activePanel = 3">Compétences</button>
+    <button (click)="activePanel = 4">Histoire Réputation</button>
+    <button (click)="activePanel = 5">Inventaire</button>
+  </div>
+  <!-- Panel des caractéristiques générales -->
+  <div *ngIf="activePanel == 1" id="panel1">
+    <p>Nom : {{character.name}}</p>
+    <p>Niveau : {{character.level}}</p>
+    <p>Expérience : {{character.xp}} / {{character.xpToNext}}</p>
+    <!-- Tableau des attributs -->
+    <table>
+      <tr>
+        <th>Force</th>
+        <th>Perception</th>
+        <th>Endurance</th>
+        <th>Charisme</th>
+        <th>Intelligence</th>
+        <th>Agilité</th>
+        <th>Chance</th>
+        <th>Points de Chance</th>
+      </tr>
+      <tr>
+        <td>{{character.attributes.strength}}</td>
+        <td>{{character.attributes.perception}}</td>
+        <td>{{character.attributes.endurance}}</td>
+        <td>{{character.attributes.charisme}}</td>
+        <td>{{character.attributes.intelligence}}</td>
+        <td>{{character.attributes.agility}}</td>
+        <td>{{character.attributes.luck}}</td>
+        <td>{{character.attributes.luckPoints}}</td>
+      </tr>
+    </table>
+    <!-- Tableau des compétences -->
+    <table>
+      <tr>
+        <td><input type="checkbox" [(ngModel)]="character.skills.athletics"></td><td>{{character.skills.athleticslvl}}</td><th>Athlétisme</th>
+      </tr>
+      <tr>
+        <td><input type="checkbox" [(ngModel)]="character.skills.lockpicking"></td><td>{{character.skills.lockpickinglvl}}</td><th>Crochetage</th>
+      </tr>
+      <tr>
+        <td><input type="checkbox" [(ngModel)]="character.skills.speech"></td><td>{{character.skills.speechlvl}}</td><th>Discours</th>
+      </tr>
+      <tr>
+        <td><input type="checkbox" [(ngModel)]="character.skills.stealth"></td><td>{{character.skills.stealthlvl}}</td><th>Discrétion</th>
+      </tr>
+      <tr>
+        <td><input type="checkbox" [(ngModel)]="character.skills.medecine"></td><td>{{character.skills.medecinelvl}}</td><th>Médecine</th>
+      </tr>
+      <tr>
+        <td><input type="checkbox" [(ngModel)]="character.skills.driving"></td><td>{{character.skills.drivinglvl}}</td><th>Pilotage</th>
+      </tr>
+      <tr>
+        <td><input type="checkbox" [(ngModel)]="character.skills.repair"></td><td>{{character.skills.repairlvl}}</td><th>Réparation</th>
+      </tr>
+      <tr>
+        <td><input type="checkbox" [(ngModel)]="character.skills.science"></td><td>{{character.skills.sciencelvl}}</td><th>Science</th>
+      </tr>
+      <tr>
+        <td><input type="checkbox" [(ngModel)]="character.skills.survival"></td><td>{{character.skills.survivallvl}}</td><th>Survie</th>
+      </tr>
+      <tr>
+        <td><input type="checkbox" [(ngModel)]="character.skills.bartering"></td><td>{{character.skills.barteringlvl}}</td><th>Troc</th>
+      </tr>
+      <tr>
+        <td><input type="checkbox" [(ngModel)]="character.skills.game"></td><td>{{character.skills.gamelvl}}</td><th>Jeux</th>
+      </tr>
+    </table>
+    <!-- Tableau des compétences de combats -->
+    <table>
+      <tr>
+        <td><input type="checkbox" [(ngModel)]="character.skills.bareHands"></td><td>{{character.skills.bareHandslvl}}</td><th>À main nues</th>
+      </tr>
+      <tr>
+        <td><input type="checkbox" [(ngModel)]="character.skills.meleeWeapon"></td><td>{{character.skills.meleeWeaponlvl}}</td><th>Arme de mélée</th>
+      </tr>
+      <tr>
+        <td><input type="checkbox" [(ngModel)]="character.skills.lightWeapon"></td><td>{{character.skills.lightWeaponlvl}}</td><th>Arme légères</th>
+      </tr>
+      <tr>
+        <td><input type="checkbox" [(ngModel)]="character.skills.heavyWeapon"></td><td>{{character.skills.heavyWeaponlvl}}</td><th>Arme lourdes</th>
+      </tr>
+      <tr>
+        <td><input type="checkbox" [(ngModel)]="character.skills.energieWeapon"></td><td>{{character.skills.energieWeaponlvl}}</td><th>Arme à énergie</th>
+      </tr>
+      <tr>
+        <td><input type="checkbox" [(ngModel)]="character.skills.throwingWeapon"></td><td>{{character.skills.throwingWeaponlvl}}</td><th>Arme de jet</th>
+      </tr>
+      <tr>
+        <td><input type="checkbox" [(ngModel)]="character.skills.explosive"></td><td>{{character.skills.explosivelvl}}</td><th>Explosifs</th>
+      </tr>
+    </table>
+  </div>
+  <!-- Panel de la santé du joueurs et des armes / armures équipées -->
+  <div *ngIf="activePanel == 2" id="panel2">
+    <p>Santé : {{character.healthPoint}} / {{character.healthPointMax}}</p>
+    <p>Santé mentale : {{character.mentalHealthPoint}} / {{character.mentalHealthPointMax}}</p>
+    <p>Defense : {{character.defence}}</p>
+    <p>Résistance au poison : {{character.poisonResilience}}</p>
+    <p>Initiative : {{character.initiative}}</p>
+
+    <table>
+      <tr>
+        <td colspan="4" rowspan="3"></td><td colspan="4">Tête ( 1 - 2 )</td><td colspan="4" rowspan="3"></td>
+      </tr>
+      <tr>
+        <td>Résistance physique :</td><td>{{character.bodyParts[0].physicalResilience}}</td>
+        <td>Résistance radiation :</td><td>{{character.bodyParts[0].radiationResilience}}</td>
+      </tr>
+      <tr>
+        <td>Résistance énergétique</td><td>{{character.bodyParts[0].energyResilience}}</td>
+        <td>Santé AA ?</td><td>{{character.bodyParts[0].healthResilience}}</td>
+      </tr>
+      <tr>
+        <td colspan="4">Bras gauche ( 9 - 11 )</td><td colspan="4" rowspan="3"></td><td colspan="4">Bras droit ( 12 - 14 )</td>
+      </tr>
+      <tr>
+        <td>Résistance physique :</td><td>{{character.bodyParts[1].physicalResilience}}</td>
+        <td>Résistance radiation :</td><td>{{character.bodyParts[1].radiationResilience}}</td>
+        <td>Résistance physique :</td><td>{{character.bodyParts[2].physicalResilience}}</td>
+        <td>Résistance radiation :</td><td>{{character.bodyParts[2].radiationResilience}}</td>
+      </tr>
+      <tr>
+        <td>Résistance énergétique</td><td>{{character.bodyParts[1].energyResilience}}</td>
+        <td>Santé AA ?</td><td>{{character.bodyParts[1].healthResilience}}</td>
+        <td>Résistance énergétique</td><td>{{character.bodyParts[2].energyResilience}}</td>
+        <td>Santé AA ?</td><td>{{character.bodyParts[2].healthResilience}}</td>
+      </tr>
+      <tr>
+        <td colspan="4" rowspan="3"></td><td colspan="4">Torse ( 3 - 8 )</td><td colspan="4" rowspan="3"></td>
+      </tr>
+      <tr>
+        <td>Résistance physique :</td><td>{{character.bodyParts[3].physicalResilience}}</td>
+        <td>Résistance radiation :</td><td>{{character.bodyParts[3].radiationResilience}}</td>
+      </tr>
+      <tr>
+        <td>Résistance énergétique</td><td>{{character.bodyParts[3].energyResilience}}</td>
+        <td>Santé AA ?</td><td>{{character.bodyParts[3].healthResilience}}</td>
+      </tr>
+      <tr>
+        <td colspan="4">Jambe gauche ( 15 - 17 )</td><td colspan="4" rowspan="3"></td><td colspan="4">Jambe droite ( 18 - 20 )</td>
+      </tr>
+      <tr>
+        <td>Résistance physique :</td><td>{{character.bodyParts[4].physicalResilience}}</td>
+        <td>Résistance radiation :</td><td>{{character.bodyParts[4].radiationResilience}}</td>
+        <td>Résistance physique :</td><td>{{character.bodyParts[5].physicalResilience}}</td>
+        <td>Résistance radiation :</td><td>{{character.bodyParts[5].radiationResilience}}</td>
+      </tr>
+      <tr>
+        <td>Résistance énergétique</td><td>{{character.bodyParts[4].energyResilience}}</td>
+        <td>Santé AA ?</td><td>{{character.bodyParts[4].healthResilience}}</td>
+        <td>Résistance énergétique</td><td>{{character.bodyParts[5].energyResilience}}</td>
+        <td>Santé AA ?</td><td>{{character.bodyParts[5].healthResilience}}</td>
+      </tr>
+    </table>
+  </div>
+  <!-- Panel des compétences -->
+  <div *ngIf="activePanel == 3">
+    panel 3
+  </div>
+  <!-- Panel de l'histoire du personnage et de ses réputations -->
+  <div *ngIf="activePanel == 4">
+    {{character.origin}}
+  </div>
+  <!-- Panel de l'inventaire -->
+  <div *ngIf="activePanel == 5">
+    panel 5
+  </div>
 </div>
 
 

@@ -16,8 +16,12 @@ export class CharacterService {
     private _http: HttpClient
   ) { }
 
-  getCharacters(): Observable<CharacterModel[]> {
-    return this._http.get<CharacterModel[]>(environment.base_url + '/Character/Character-List');
+  // getCharacterById(id : number): Observable<CharacterModel> {
+  //   return this._http.get<CharacterModel>(environment.base_url + '/Character/Character'+id);
+  // }
+
+  CharacterGetByPseudo(pseudo : string): Observable<CharacterModel> {
+    return this._http.get<CharacterModel>(environment.base_url + '/Character/Character-Get-By-Pseudo/'+pseudo);
   }
 
   CharacterListForATeam(teamName : string): Observable<CharacterName[]>{

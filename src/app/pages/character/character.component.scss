@@ -1,8 +1,35 @@
 #characterContainer{
   height: 100%;
-  overflow-y: scroll;
-  img{
-    width: 100%;
+
+  #menuPanel{
+    height: 5vh;
+    display: flex;
+    justify-content: space-around;
+    button{
+      width: 15vw;
+      font-size: 2vh;
+    }
+  }
+
+  #panel1{
+
+  }
+
+  #panel2{
+    table {
+      background-image: url("/assets/images/VaultBoy.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 72vw;
+      text-align: center;
+    }
+    th, td{
+      background-color: rgba(0, 0, 0, 0.6);
+      height: 5vh;
+      width: 6vw;
+      border: 1px solid greenyellow;
+    }
   }
 }
 

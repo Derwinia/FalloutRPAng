@@ -60,7 +60,6 @@ export class MissionComponent {
       const dialogRef = this.dialog.open(CreateMissionDialogComponent, dialogConfig);
 
       dialogRef.afterClosed().subscribe(data => {
-        console.log(data)
         this._missionService.createMission(data)
       });
     });

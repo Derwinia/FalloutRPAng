@@ -1,148 +1,175 @@
 export interface CharacterModel {
-  Id : number,
-  Name : string,
-  Xp : number,
-  XpToNext : number,
-  Origin : string,
-  Level : number,
-  MeleeBonus : number,
-  Defence : number,
-  Initiative : number,
-  HealthPoint : number,
-  HealthPointMax : number,
-  PoisonResilience : number,
-  Background : string,
-  Caps : number,
-  MaxWeight : number,
-  Weight : number,
+  id : number,
+  name : string,
+  xp : number,
+  xpToNext : number,
+  origin : string,
+  level : number,
+  meleeBonus : number,
+  defence : number,
+  initiative : number,
+  healthPoint : number,
+  healthPointMax : number,
+  mentalHealthPoint : number,
+  mentalHealthPointMax : number,
+  poisonResilience : number,
+  background : string,
+  caps : number,
+  maxWeight : number,
 
 // Foreign Keys
-  Skills : SkillModel,
-  BodyParts : BodyPartModel[],
-  Weapons : WeaponModel[],
-  Perks : PerkModel[],
-  Reputation : ReputationModel[],
-  Inventory : InventoryModel,
+  attributes : AttributeModel,
+  skills : SkillModel,
+  bodyParts : BodyPartModel[],
+  reputation : ReputationModel[],
+  weapons : WeaponModel[],
+  perks : PerkModel[],
+  inventory : InventoryModel,
+}
+
+export interface AttributeModel{
+  id : number,
+  strength : number,
+  perception : number,
+  endurance : number,
+  charisme : number,
+  intelligence : number,
+  agility : number,
+  luck : number,
+  luckPoints : number
 }
 
 export interface SkillModel {
-  Id : number,
-  RightHanded : boolean,
-  LeftHanded : boolean,
-  Athletics : boolean,
-  Lockpicking : boolean,
-  Speech : boolean,
-  Stealth : boolean,
-  Medecine : boolean,
-  Driving : boolean,
-  Repair : boolean,
-  Science : boolean,
-  Survival : boolean,
-  Bartering : boolean,
-  BareHands : boolean,
-  MeleeWeapon : boolean,
-  LightWeapon : boolean,
-  HeavyWeapon : boolean,
-  EnergieWeapon : boolean,
-  ThrowingWeapon : boolean,
-  Explosive : boolean,
+  id : number,
+  rightHanded : boolean,
+  leftHanded : boolean,
+  athletics : boolean,
+  athleticslvl : boolean,
+  lockpicking : boolean,
+  lockpickinglvl : boolean,
+  speech : boolean,
+  speechlvl : boolean,
+  stealth : boolean,
+  stealthlvl : boolean,
+  medecine : boolean,
+  medecinelvl : boolean,
+  driving : boolean,
+  drivinglvl : boolean,
+  repair : boolean,
+  repairlvl : boolean,
+  science : boolean,
+  sciencelvl : boolean,
+  survival : boolean,
+  survivallvl : boolean,
+  bartering : boolean,
+  barteringlvl : boolean,
+  bareHands : boolean,
+  bareHandslvl : boolean,
+  meleeWeapon : boolean,
+  meleeWeaponlvl : boolean,
+  lightWeapon : boolean,
+  lightWeaponlvl : boolean,
+  heavyWeapon : boolean,
+  heavyWeaponlvl : boolean,
+  energieWeapon : boolean,
+  energieWeaponlvl : boolean,
+  throwingWeapon : boolean,
+  throwingWeaponlvl : boolean,
+  explosive : boolean,
+  explosivelvl : boolean,
+  game : boolean,
+  gamelvl : boolean,
 }
 
 export interface BodyPartModel {
-  Id : number,
-  Part : number,
-  PhysicalResilience : number,
-  RadiationResilience : number,
-  EnergyResilience : number,
-  HealthResilience : number,
-}
-
-export interface WeaponModel {
-  Id : number,
-  Name : string,
-  TN : number,
-  DC : number,
-  PhysicalDamage : boolean,
-  EnergyDamage : boolean,
-  RadiationDamage : boolean,
-  PoisonDamage : boolean,
-  Effects : string,
-  Proprieties : string,
-  RateOfFire : number,
-  Range : number,
-  Ammo : number,
-  Weigth : number,
-}
-
-export interface PerkModel {
-  Id : number,
-  Name : string,
-  Rank : number,
-  Effect : string,
+  id : number,
+  part : number,
+  physicalResilience : number,
+  radiationResilience : number,
+  energyResilience : number,
+  healthResilience : number,
 }
 
 export interface ReputationModel {
-  Id : number,
-  Name : string,
-  Rank : number,
+  id : number,
+  name : string,
+  rank : number,
+}
+
+export interface WeaponModel {
+  id : number,
+  name : string,
+  tN : number,
+  dC : number,
+  physicalDamage : boolean,
+  energyDamage : boolean,
+  radiationDamage : boolean,
+  poisonDamage : boolean,
+  effects : string,
+  proprieties : string,
+  rateOfFire : number,
+  range : number,
+  ammo : number,
+  weigth : number,
+}
+
+export interface PerkModel {
+  id : number,
+  name : string,
+  rank : number,
+  effect : string,
 }
 
 export interface InventoryModel {
-  Id : number[],
-  Ammos : AmmoModel[],
-  Materials : MaterialModel[],
-  Drinks : DrinkModel[],
-  Foods : FoodModel[],
-  Chemicals : ChemicalModel[],
-  Equipements : EquipementModel[],
+  id : number,
+  ammos : AmmoModel[],
+  chemicals : ChemicalModel[],
+  drinks : DrinkModel[],
+  equipements : EquipementModel[],
+  foods : FoodModel[],
+  materials : MaterialModel[],
 }
 
 export interface AmmoModel {
-  Id : number,
-  Name : string,
-  Quantity : number,
-  Weight : number,
-  TotalWeight : number,
-}
-
-export interface MaterialModel {
-  Id : number,
-  Name : string,
-  Quantity : number,
-  Weight : number,
-  TotalWeight : number,
-}
-
-export interface DrinkModel {
-  Id : number,
-  Name : string,
-  Quantity : number,
-  Weight : number,
-  TotalWeight : number,
-}
-
-export interface FoodModel {
-  Id : number,
-  Name : string,
-  Quantity : number,
-  Weight : number,
-  TotalWeight : number,
+  id : number,
+  name : string,
+  quantity : number,
+  weight : number,
 }
 
 export interface ChemicalModel {
-  Id : number,
-  Name : string,
-  Quantity : number,
-  Weight : number,
-  TotalWeight : number,
+  id : number,
+  name : string,
+  quantity : number,
+  weight : number,
+}
+
+export interface DrinkModel {
+  id : number,
+  name : string,
+  quantity : number,
+  weight : number,
 }
 
 export interface EquipementModel {
-  Id : number,
-  Name : string,
-  Quantity : number,
-  Weight : number,
-  TotalWeight : number,
+  id : number,
+  name : string,
+  quantity : number,
+  weight : number,
+}
+
+export interface FoodModel {
+  id : number,
+  name : string,
+  quantity : number,
+  weight : number,
+}
+
+export interface MaterialModel {
+  id : number,
+  name : string,
+  quantity : number,
+  weight : number,
 }
 
 export interface CharacterName{
