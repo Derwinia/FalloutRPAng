@@ -49,6 +49,17 @@
   background-color: black;
 }
 
+.rulesboxplayer {
+  padding: 20px 10px;
+  border-bottom: solid 1px greenyellow;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  background-color: black;
+}
+
 #ruletitle{
   width: 8vw;
   overflow-x:hidden;

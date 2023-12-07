@@ -11,6 +11,7 @@ import { ModifyRuleDialogComponent } from 'src/app/tool/modify-rule-dialog/modif
 import { CreateRuleDialogComponent } from 'src/app/tool/create-rule-dialog/create-rule-dialog.component';
 import { CreateFolderRuleDialogComponent } from 'src/app/tool/create-folder-rule-dialog/create-folder-rule-dialog.component';
 import { concatMap, finalize } from 'rxjs';
+import { DisplayRuleDialogComponent } from 'src/app/tool/display-rule-dialog/display-rule-dialog.component';
 
 @Component({
   templateUrl: './rule.component.html',
@@ -18,6 +19,7 @@ import { concatMap, finalize } from 'rxjs';
 })
 export class RuleComponent {
 
+  path : boolean = false;
   isLoading: boolean = false;
   rules : RuleModel[] = [];
   player: PlayerModel = {token : "", pseudo : "", team : ""};
@@ -42,15 +44,18 @@ export class RuleComponent {
 
   setPath(path : string){
     this.ruleService.setPath(path);
+    this.path = true;
   }
 
   furtherPath(path : string){
     this.ruleService.furtherPath(path);
+    this.path = true;
   }
 
   previousPath(){
     if(!this.ruleService.previousPath()){
       this.rules = [];
+      this.path = false;
     }
   }
 
@@ -97,6 +102,20 @@ export class RuleComponent {
     dialogConfig.data = rule
 
     const dialogRef = this.dialog.open(ModifyRuleDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+        data => this.ruleService.modifyRule(data)
+    );
+  }
+
+  displayRule(rule : RuleModel){
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = rule
+
+    const dialogRef = this.dialog.open(DisplayRuleDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
         data => this.ruleService.modifyRule(data)

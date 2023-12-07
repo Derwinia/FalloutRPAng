@@ -1,5 +1,5 @@
 <div *ngIf="player.pseudo">
-  <div *ngIf="rules.length != 0">
+  <div *ngIf="path">
     <div *ngIf="player.team =='admin'">
       <div id="actionButton">
         <button (click)="createRule()">Rajouter une règle</button>
@@ -19,12 +19,16 @@
     </div>
 
     <div *ngIf="player.team !='admin'">
-      <ul>
-        <li *ngFor="let rule of rules" >{{rule.name}} - {{rule.shortDescription}}</li>
-      </ul>
+      <table mat-table class="ruleslist">
+        <div class="rulesboxplayer" *ngFor="let rule of rules">
+          <a id="ruletitle">{{rule.name}}</a><a id="ruledescription">{{rule.shortDescription}}</a>
+          <button *ngIf="rule.isFolder" (click)="furtherPath(rule.shortDescription)">Accéder aux données</button>
+          <button *ngIf="rule.description" (click)="displayRule(rule)">Voir les détails</button>
+        </div>
+      </table>
     </div>
   </div>
-  <div id="nopath" *ngIf="rules.length == 0">
+  <div id="nopath" *ngIf="!path">
     <button (click)="setPath('ElementaryRule')">Règles élémentaires</button>
     <button (click)="setPath('AppliedRule')">Règles en application</button>
     <button (click)="setPath('Equipement')">Equipement</button>

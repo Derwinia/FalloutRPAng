@@ -48,8 +48,6 @@ export class RuleService {
       this.realPath = this.realPath+'/'+this.tempPath[i]
     }
     this.actualPath = this.tempPath[this.tempPath.length-2]
-    console.log(this.actualPath)
-    console.log(this.realPath)
     this.getRulesFromPath().subscribe(x => this.sendData(x));
     return true
   }

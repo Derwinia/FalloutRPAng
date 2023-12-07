@@ -10,6 +10,8 @@ import { NavComponent } from './nav/nav.component';
 import { RuleComponent } from './pages/rule/rule.component';
 import { CreateRuleDialogComponent } from './tool/create-rule-dialog/create-rule-dialog.component';
 import { ModifyRuleDialogComponent } from './tool/modify-rule-dialog/modify-rule-dialog.component';
+import { DisplayRuleDialogComponent } from './tool/display-rule-dialog/display-rule-dialog.component';
+import { CreateFolderRuleDialogComponent } from './tool/create-folder-rule-dialog/create-folder-rule-dialog.component';
 
 import { CharacterComponent } from './pages/character/character.component';
 import { CreateTeamDialogComponent } from './tool/create-team-dialog/create-team-dialog.component';
@@ -33,7 +35,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { CreateFolderRuleDialogComponent } from './tool/create-folder-rule-dialog/create-folder-rule-dialog.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { CreateFolderRuleDialogComponent } from './tool/create-folder-rule-dialo
     CreateMissionDialogComponent,
     ModifyMissionDialogComponent,
     CreateFolderRuleDialogComponent,
+    DisplayRuleDialogComponent,
 
   ],
   imports: [
