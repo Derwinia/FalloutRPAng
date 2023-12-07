@@ -28,4 +28,9 @@ export class CharacterService {
     return this._http.get<CharacterName[]>(environment.base_url + '/Character/Character-List-For-A-Team/'+teamName)
   }
 
+  CharacterUpdate(character : CharacterModel){
+    if(character){
+      this._http.patch(environment.base_url + '/Character/Character-Update', character).subscribe();
+    }
+  }
 }

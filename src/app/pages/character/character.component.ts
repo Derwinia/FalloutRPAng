@@ -41,7 +41,6 @@ export class CharacterComponent {
         this._characterService.CharacterGetByPseudo(this.player.pseudo).subscribe({
           next: character => {
             this.character = character
-            console.log(character.bodyParts)
           }
         })
       }
@@ -90,5 +89,10 @@ export class CharacterComponent {
     dialogRef.afterClosed().subscribe(
         data => this._playerService.createPlayer(data)
     );
+  }
+
+  save(){
+    console.log(this.character.attributes)
+    this._characterService.CharacterUpdate(this.character)
   }
 }
