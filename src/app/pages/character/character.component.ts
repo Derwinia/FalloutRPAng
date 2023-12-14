@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, numberAttribute } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PlayerModel, TeamModel } from 'src/app/models/player.model';
 import { PlayerService } from 'src/app/services/player.service';
@@ -14,7 +14,7 @@ import { CharacterModel } from 'src/app/models/character.model';
 })
 export class CharacterComponent {
 
-  activePanel : number = 1;
+  activePanel : number = 3;
   isLoading : boolean = false;
   player: PlayerModel = {token : "", pseudo : "", team : ""};
   teams! : TeamModel[];
@@ -41,6 +41,7 @@ export class CharacterComponent {
         this._characterService.CharacterGetByPseudo(this.player.pseudo).subscribe({
           next: character => {
             this.character = character
+            console.log(character)
           }
         })
       }
@@ -92,7 +93,36 @@ export class CharacterComponent {
   }
 
   save(){
-    console.log(this.character.attributes)
     this._characterService.CharacterUpdate(this.character)
+  }
+
+  totalWeigth() : number{
+    let total : number = 0;
+
+    this.character.inventories.ammos.forEach(element => {
+      total += element.weight*element.quantity
+    });
+
+    this.character.inventories.chemicals.forEach(element => {
+      total += element.weight*element.quantity
+    });
+
+    this.character.inventories.drinks.forEach(element => {
+      total += element.weight*element.quantity
+    });
+
+    this.character.inventories.equipements.forEach(element => {
+      total += element.weight*element.quantity
+    });
+
+    this.character.inventories.foods.forEach(element => {
+      total += element.weight*element.quantity
+    });
+
+    this.character.inventories.materials.forEach(element => {
+      total += element.weight*element.quantity
+    });
+
+    return total;
   }
 }

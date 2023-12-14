@@ -7,6 +7,7 @@
     <button (click)="activePanel = 5">Histoire Réputation</button>
   </div>
   <button (click)="save()">Enregistrer les changements</button>
+
   <!-- Panel des caractéristiques générales -->
   <div *ngIf="activePanel == 1" id="panel1">
     <p>Nom : <input type="text" [(ngModel)]="character.name"></p>
@@ -96,6 +97,7 @@
       </tr>
     </table>
   </div>
+
   <!-- Panel de la santé du joueurs et des armes / armures équipées -->
   <div *ngIf="activePanel == 2" id="panel2">
     <p>Santé : <input type="text" [(ngModel)]="character.healthPoint"> / <input type="text" [(ngModel)]="character.healthPointMax"></p>
@@ -110,8 +112,8 @@
         <td colspan="4" rowspan="3"></td><td colspan="4">Tête ( 1 - 2 )</td><td colspan="4" rowspan="3"></td>
       </tr>
       <tr>
-        <td>Résistance physique :</td><td><input type="text" [(ngModel)]="character.bodyParts[0].physicalResilience"></td>
-        <td>Résistance radiation :</td><td><input type="text" [(ngModel)]="character.bodyParts[0].radiationResilience"></td>
+        <td>Résistance physique</td><td><input type="text" [(ngModel)]="character.bodyParts[0].physicalResilience"></td>
+        <td>Résistance radiation</td><td><input type="text" [(ngModel)]="character.bodyParts[0].radiationResilience"></td>
       </tr>
       <tr>
         <td>Résistance énergétique</td><td><input type="text" [(ngModel)]="character.bodyParts[0].energyResilience"></td>
@@ -121,10 +123,10 @@
         <td colspan="4">Bras gauche ( 9 - 11 )</td><td colspan="4" rowspan="3"></td><td colspan="4">Bras droit ( 12 - 14 )</td>
       </tr>
       <tr>
-        <td>Résistance physique :</td><td><input type="text" [(ngModel)]="character.bodyParts[1].physicalResilience"></td>
-        <td>Résistance radiation :</td><td><input type="text" [(ngModel)]="character.bodyParts[1].radiationResilience"></td>
-        <td>Résistance physique :</td><td><input type="text" [(ngModel)]="character.bodyParts[2].physicalResilience"></td>
-        <td>Résistance radiation :</td><td><input type="text" [(ngModel)]="character.bodyParts[2].radiationResilience"></td>
+        <td>Résistance physique</td><td><input type="text" [(ngModel)]="character.bodyParts[1].physicalResilience"></td>
+        <td>Résistance radiation</td><td><input type="text" [(ngModel)]="character.bodyParts[1].radiationResilience"></td>
+        <td>Résistance physique</td><td><input type="text" [(ngModel)]="character.bodyParts[2].physicalResilience"></td>
+        <td>Résistance radiation</td><td><input type="text" [(ngModel)]="character.bodyParts[2].radiationResilience"></td>
       </tr>
       <tr>
         <td>Résistance énergétique</td><td><input type="text" [(ngModel)]="character.bodyParts[1].energyResilience"></td>
@@ -136,8 +138,8 @@
         <td colspan="4" rowspan="3"></td><td colspan="4">Torse ( 3 - 8 )</td><td colspan="4" rowspan="3"></td>
       </tr>
       <tr>
-        <td>Résistance physique :</td><td><input type="text" [(ngModel)]="character.bodyParts[3].physicalResilience"></td>
-        <td>Résistance radiation :</td><td><input type="text" [(ngModel)]="character.bodyParts[3].radiationResilience"></td>
+        <td>Résistance physique</td><td><input type="text" [(ngModel)]="character.bodyParts[3].physicalResilience"></td>
+        <td>Résistance radiation</td><td><input type="text" [(ngModel)]="character.bodyParts[3].radiationResilience"></td>
       </tr>
       <tr>
         <td>Résistance énergétique</td><td><input type="text" [(ngModel)]="character.bodyParts[3].energyResilience"></td>
@@ -147,10 +149,10 @@
         <td colspan="4">Jambe gauche ( 15 - 17 )</td><td colspan="4" rowspan="3"></td><td colspan="4">Jambe droite ( 18 - 20 )</td>
       </tr>
       <tr>
-        <td>Résistance physique :</td><td><input type="text" [(ngModel)]="character.bodyParts[4].physicalResilience"></td>
-        <td>Résistance radiation :</td><td><input type="text" [(ngModel)]="character.bodyParts[4].radiationResilience"></td>
-        <td>Résistance physique :</td><td><input type="text" [(ngModel)]="character.bodyParts[5].physicalResilience"></td>
-        <td>Résistance radiation :</td><td><input type="text" [(ngModel)]="character.bodyParts[5].radiationResilience"></td>
+        <td>Résistance physique</td><td><input type="text" [(ngModel)]="character.bodyParts[4].physicalResilience"></td>
+        <td>Résistance radiation</td><td><input type="text" [(ngModel)]="character.bodyParts[4].radiationResilience"></td>
+        <td>Résistance physique</td><td><input type="text" [(ngModel)]="character.bodyParts[5].physicalResilience"></td>
+        <td>Résistance radiation</td><td><input type="text" [(ngModel)]="character.bodyParts[5].radiationResilience"></td>
       </tr>
       <tr>
         <td>Résistance énergétique</td><td><input type="text" [(ngModel)]="character.bodyParts[4].energyResilience"></td>
@@ -159,30 +161,170 @@
         <td>Santé AA ?</td><td><input type="text" [(ngModel)]="character.bodyParts[5].healthResilience"></td>
       </tr>
     </table>
+
+    <table>
+      <tr>
+        <th>Nom</th>
+        <th>TN</th>
+        <th>DC</th>
+        <th>Physique</th>
+        <th>Energétique</th>
+        <th>Radiation</th>
+        <th>Poison</th>
+        <th>Effet</th>
+        <th>Propriété</th>
+        <th>Cadence</th>
+        <th>Portée</th>
+        <th>Munition</th>
+        <th>Poids</th>
+      </tr>
+      <tr *ngFor="let weapon of character.weapons">
+        <td><input type="text" [(ngModel)]="weapon.name"></td>
+        <td><input type="text" [(ngModel)]="weapon.tN"></td>
+        <td><input type="text" [(ngModel)]="weapon.dC"></td>
+        <td><input type="checkbox" [(ngModel)]="weapon.physicalDamage"></td>
+        <td><input type="checkbox" [(ngModel)]="weapon.energyDamage"></td>
+        <td><input type="checkbox" [(ngModel)]="weapon.radiationDamage"></td>
+        <td><input type="checkbox" [(ngModel)]="weapon.poisonDamage"></td>
+        <td><input type="text" [(ngModel)]="weapon.effects"></td>
+        <td><input type="text" [(ngModel)]="weapon.proprieties"></td>
+        <td><input type="text" [(ngModel)]="weapon.rateOfFire"></td>
+        <td><input type="text" [(ngModel)]="weapon.range"></td>
+        <td><input type="text" [(ngModel)]="weapon.ammo"></td>
+        <td><input type="text" [(ngModel)]="weapon.weigth"></td>
+      </tr>
+    </table>
+
   </div>
+
   <!-- Panel des compétences -->
-  <div *ngIf="activePanel == 3">
+  <div *ngIf="activePanel == 3" id="panel3">
     <table>
       <tr>
         <th>Nom</th><th>Rang</th><th>Effet</th>
       </tr>
       <tr *ngFor="let perk of character.perks">
-        <td><input type="text" [(ngModel)]="perk.name"></td>
-        <td><input type="text" [(ngModel)]="perk.rank"></td>
-        <td><input type="text" [(ngModel)]="perk.effect"></td>
+        <td><input type="text" [(ngModel)]="perk.name" class="name"></td>
+        <td><input type="text" [(ngModel)]="perk.rank" class="rank"></td>
+        <td><input type="textarea" [(ngModel)]="perk.effect" class="desc"></td>
       </tr>
     </table>
   </div>
+
   <!-- Panel de l'inventaire -->
-  <div *ngIf="activePanel == 4">
+  <div *ngIf="activePanel == 4" id="panel4">
     <p>Capsule : <input type="text" [(ngModel)]="character.caps"></p>
-    <p>Poids : (calcule automatique) / <input type="text" [(ngModel)]="character.maxWeight"></p>
+    <p>Poids :
+      {{totalWeigth()}}
+      / <input type="text" [(ngModel)]="character.maxWeight"></p>
+
+    <div>
+      <h2>Munitions :</h2>
+      <table>
+        <tr>
+          <th>Nom</th><th>Quantité</th><th>Poids / u</th><th>Poids total</th>
+        </tr>
+        <tr *ngFor="let item of character.inventories.ammos">
+          <td><input type="text" [(ngModel)]="item.name"></td>
+          <td><input type="text" [(ngModel)]="item.quantity"></td>
+          <td><input type="text" [(ngModel)]="item.weight"></td>
+          <td><p>{{item.quantity*item.weight}}</p></td>
+        </tr>
+      </table>
+    </div>
+
+    <div>
+      <h2>Produits chimiques :</h2>
+      <table>
+        <tr>
+          <th>Nom</th><th>Quantité</th><th>Poids / u</th><th>Poids total</th>
+        </tr>
+        <tr *ngFor="let item of character.inventories.chemicals">
+          <td><input type="text" [(ngModel)]="item.name"></td>
+          <td><input type="text" [(ngModel)]="item.quantity"></td>
+          <td><input type="text" [(ngModel)]="item.weight"></td>
+          <td><p>{{item.quantity*item.weight}}</p></td>
+        </tr>
+      </table>
+    </div>
+
+    <div>
+      <h2>Boissons :</h2>
+      <table>
+        <tr>
+          <th>Nom</th><th>Quantité</th><th>Poids / u</th><th>Poids total</th>
+        </tr>
+        <tr *ngFor="let item of character.inventories.drinks">
+          <td><input type="text" [(ngModel)]="item.name"></td>
+          <td><input type="text" [(ngModel)]="item.quantity"></td>
+          <td><input type="text" [(ngModel)]="item.weight"></td>
+          <td><p>{{item.quantity*item.weight}}</p></td>
+        </tr>
+      </table>
+    </div>
+
+    <div>
+      <h2>Equipements :</h2>
+      <table>
+        <tr>
+          <th>Nom</th><th>Quantité</th><th>Poids / u</th><th>Poids total</th>
+        </tr>
+        <tr *ngFor="let item of character.inventories.equipements">
+          <td><input type="text" [(ngModel)]="item.name"></td>
+          <td><input type="text" [(ngModel)]="item.quantity"></td>
+          <td><input type="text" [(ngModel)]="item.weight"></td>
+          <td><p>{{item.quantity*item.weight}}</p></td>
+        </tr>
+      </table>
+    </div>
+
+    <div>
+      <h2>Nourritures :</h2>
+      <table>
+        <tr>
+          <th>Nom</th><th>Quantité</th><th>Poids / u</th><th>Poids total</th>
+        </tr>
+        <tr *ngFor="let item of character.inventories.foods">
+          <td><input type="text" [(ngModel)]="item.name"></td>
+          <td><input type="text" [(ngModel)]="item.quantity"></td>
+          <td><input type="text" [(ngModel)]="item.weight"></td>
+          <td><p>{{item.quantity*item.weight}}</p></td>
+        </tr>
+      </table>
+    </div>
+
+    <div>
+      <h2>Matériaux :</h2>
+      <table>
+        <tr>
+          <th>Nom</th><th>Quantité</th><th>Poids / u</th><th>Poids total</th>
+        </tr>
+        <tr *ngFor="let item of character.inventories.materials">
+          <td><input type="text" [(ngModel)]="item.name"></td>
+          <td><input type="text" [(ngModel)]="item.quantity"></td>
+          <td><input type="text" [(ngModel)]="item.weight"></td>
+          <td><p>{{item.quantity*item.weight}}</p></td>
+        </tr>
+      </table>
+    </div>
+
   </div>
+
   <!-- Panel de l'histoire du personnage et de ses réputations -->
-  <div *ngIf="activePanel == 5">
+  <div *ngIf="activePanel == 5" id="panel5">
     <p>Origine de {{character.name}} : <input type="text" [(ngModel)]="character.origin"></p>
     <p>Background : <br> <input type="textarea" [(ngModel)]="character.background"></p>
+    <table>
+      <tr>
+        <th>Rang</th><th>Nom</th>
+      </tr>
+      <tr *ngFor="let rep of character.reputations">
+        <td><input type="text" [(ngModel)]="rep.rank"></td>
+        <td><input type="text" [(ngModel)]="rep.name"></td>
+      </tr>
+    </table>
   </div>
+
 </div>
 
 

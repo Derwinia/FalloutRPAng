@@ -21,10 +21,10 @@ export interface CharacterModel {
   attributes : AttributeModel,
   skills : SkillModel,
   bodyParts : BodyPartModel[],
-  reputation : ReputationModel[],
+  reputations : ReputationModel[],
   weapons : WeaponModel[],
   perks : PerkModel[],
-  inventory : InventoryModel,
+  inventories : InventoryModel,
 }
 
 export interface AttributeModel{

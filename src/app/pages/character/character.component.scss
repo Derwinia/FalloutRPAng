@@ -1,5 +1,5 @@
 #characterContainer{
-  height: 100%;
+  //height: 100%;
 
   #menuPanel{
     height: 5vh;
@@ -21,14 +21,49 @@
       background-position: center;
       background-repeat: no-repeat;
       background-size: contain;
-      width: 72vw;
+      width: 24vw;
       text-align: center;
     }
     th, td{
       background-color: rgba(0, 0, 0, 0.6);
-      height: 5vh;
-      width: 6vw;
+      height: 2vh;
+      width: 5vw;
       border: 1px solid greenyellow;
+      input{
+        width: 2vw;
+        text-align: center;
+      }
+    }
+  }
+
+  #panel3{
+    th{
+      border-bottom: 1px solid;
+      border-color: greenyellow;
+    }
+    td{
+      border-left: 1px solid;
+      border-bottom: 1px solid;
+      border-color: greenyellow;
+
+    }
+    input{
+      height: 1.5em;
+      font-size:medium;
+      color: greenyellow;
+      background-color: black;
+      border: 0;
+    }
+    .name{
+      text-align: center;
+    }
+    .rank{
+      width: 2vw;
+      text-align: center;
+    }
+    .desc{
+      width: 70vw;
+      padding-left: 5px;
     }
   }
 }
