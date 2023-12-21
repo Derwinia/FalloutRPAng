@@ -6,7 +6,7 @@ import { CharacterService } from 'src/app/services/character.service';
 import { CreateTeamDialogComponent } from 'src/app/tool/create-team-dialog/create-team-dialog.component';
 import { CreateCharacterDialogComponent } from 'src/app/tool/create-character-dialog/create-character-dialog.component';
 import { concatMap, finalize } from 'rxjs';
-import { CharacterModel } from 'src/app/models/character.model';
+import { CharacterModel, PerkModel, SkillModel } from 'src/app/models/character.model';
 
 @Component({
   templateUrl: './character.component.html',
@@ -38,10 +38,9 @@ export class CharacterComponent {
 
     if(this.player.team){
       if(this.player.team != "admin"){
-        this._characterService.CharacterGetByPseudo(this.player.pseudo).subscribe({
+        this._characterService.characterGetByPseudo(this.player.pseudo).subscribe({
           next: character => {
             this.character = character
-            console.log(character)
           }
         })
       }
@@ -93,7 +92,7 @@ export class CharacterComponent {
   }
 
   save(){
-    this._characterService.CharacterUpdate(this.character)
+    this._characterService.characterUpdate(this.character)
   }
 
   totalWeigth() : number{
@@ -124,5 +123,49 @@ export class CharacterComponent {
     });
 
     return total;
+  }
+
+  perkCreate(){
+    this._characterService.perkCreate(this.character.id).subscribe(
+      (response) => {
+        const newPerkId = response.perkId;
+        const newPerk: PerkModel = {
+          id: newPerkId,
+          name: "X",
+          rank : 0,
+          effect : "X"
+        };
+
+        // Utilisez newPerk comme nécessaire
+        this.character.perks.push(newPerk)
+      },
+      (error) => {
+        console.error('Erreur lors de la création de la perk', error);
+      }
+    )
+  }
+
+  perkDelete(perkToDelete : PerkModel){
+    if(confirm("Es tu sûr ? ")) {
+      this.isLoading = true;
+      this._characterService.perkDelete(perkToDelete.id).subscribe(
+        () => {
+          // La suppression a réussi
+          const perksTemp : PerkModel[] = []
+          this.character.perks.filter((perk) => {
+            // Filtre l'élément supprimé en l'excluant pour reconstruire la liste des perks
+            if (perk.id != perkToDelete.id) {
+              perksTemp.push(perk)
+            }
+          });
+          this.character.perks = perksTemp
+          return;
+        },
+        (error) => {
+          // La suppression n'a pas réussi
+          console.error('Erreur lors de la suppression', error);
+        }
+      );
+    }
   }
 }

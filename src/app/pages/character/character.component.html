@@ -199,6 +199,7 @@
 
   <!-- Panel des compétences -->
   <div *ngIf="activePanel == 3" id="panel3">
+    <button (click)="perkCreate()">Rajouter une compétence</button>
     <table>
       <tr>
         <th>Nom</th><th>Rang</th><th>Effet</th>
@@ -207,6 +208,7 @@
         <td><input type="text" [(ngModel)]="perk.name" class="name"></td>
         <td><input type="text" [(ngModel)]="perk.rank" class="rank"></td>
         <td><input type="textarea" [(ngModel)]="perk.effect" class="desc"></td>
+        <td><button (click)="perkDelete(perk)" class="del">Supprimer</button></td>
       </tr>
     </table>
   </div>

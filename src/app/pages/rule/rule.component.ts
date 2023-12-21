@@ -10,7 +10,7 @@ import { PlayerModel } from 'src/app/models/player.model';
 import { ModifyRuleDialogComponent } from 'src/app/tool/modify-rule-dialog/modify-rule-dialog.component';
 import { CreateRuleDialogComponent } from 'src/app/tool/create-rule-dialog/create-rule-dialog.component';
 import { CreateFolderRuleDialogComponent } from 'src/app/tool/create-folder-rule-dialog/create-folder-rule-dialog.component';
-import { concatMap, finalize } from 'rxjs';
+import { concatMap, finalize, take } from 'rxjs';
 import { DisplayRuleDialogComponent } from 'src/app/tool/display-rule-dialog/display-rule-dialog.component';
 
 @Component({
@@ -22,6 +22,7 @@ export class RuleComponent {
   path : boolean = false;
   isLoading: boolean = false;
   rules : RuleModel[] = [];
+  rulesTemp : RuleModel[] = [];
   player: PlayerModel = {token : "", pseudo : "", team : ""};
   ruleOrder? : RuleOrderModel;
 
@@ -31,15 +32,17 @@ export class RuleComponent {
     private dialog : MatDialog,
     ) { }
 
-  ngOnInit(): void {
-    this.ruleService.data$.subscribe((data) => {
-      this.rules = data;
-    });
+    ngOnInit(): void {
+      this.ruleService.data$
+      .subscribe((data) => {
+        this.rules = data;
+      })
     this.playerService.user$.subscribe({
       next: player => {
         this.player = player
       }
     });
+
   }
 
   setPath(path : string){
@@ -122,15 +125,27 @@ export class RuleComponent {
     );
   }
 
-  delete(id: number) {
+  delete(ruleToDelete: RuleModel) {
     if(confirm("Tu es sûr de ce que tu fais Mathieu ? ")) {
       this.isLoading = true;
-      this.ruleService.deleteRule(id.toString()).pipe(
-        concatMap(() => this.ruleService.getRules()),
-        finalize(() => this.isLoading = false)
-      ).subscribe({
-        next: response => this.rules = response
-      });
+      this.ruleService.deleteRule(ruleToDelete.id).subscribe(
+        () => {
+          // La suppression a réussi
+          this.rulesTemp = []
+          this.rules.filter((rule) => {
+            // Filtre l'élément supprimé en l'excluant pour reconstruire la liste des rules
+            if (rule.id != ruleToDelete.id) {
+              this.rulesTemp.push(rule)
+            }
+          });
+          this.rules = this.rulesTemp
+          return;
+        },
+        (error) => {
+          // La suppression n'a pas réussi
+          console.error('Erreur lors de la suppression', error);
+        }
+      );
     }
   }
 }

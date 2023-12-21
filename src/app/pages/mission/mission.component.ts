@@ -48,7 +48,7 @@ export class MissionComponent {
 
   createMission(team : string){
 
-    this._characterService.CharacterListForATeam(team).subscribe(x => {
+    this._characterService.characterListForATeam(team).subscribe(x => {
       this.characters = x
 
       const dialogConfig = new MatDialogConfig();
