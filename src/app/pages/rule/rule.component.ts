@@ -12,6 +12,7 @@ import { CreateRuleDialogComponent } from 'src/app/tool/create-rule-dialog/creat
 import { CreateFolderRuleDialogComponent } from 'src/app/tool/create-folder-rule-dialog/create-folder-rule-dialog.component';
 import { concatMap, finalize, take } from 'rxjs';
 import { DisplayRuleDialogComponent } from 'src/app/tool/display-rule-dialog/display-rule-dialog.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   templateUrl: './rule.component.html',
@@ -30,19 +31,25 @@ export class RuleComponent {
     private ruleService : RuleService,
     private playerService: PlayerService,
     private dialog : MatDialog,
+    private route : ActivatedRoute
     ) { }
 
     ngOnInit(): void {
+
       this.ruleService.data$
       .subscribe((data) => {
         this.rules = data;
       })
+
     this.playerService.user$.subscribe({
       next: player => {
         this.player = player
       }
     });
 
+    this.route.params.subscribe(params => {
+      this.setPath(params['choice'])
+    });
   }
 
   setPath(path : string){

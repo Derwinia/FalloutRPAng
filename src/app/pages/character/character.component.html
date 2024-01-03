@@ -107,7 +107,7 @@
     <p>Initiative : <input type="text" [(ngModel)]="character.initiative"></p>
     <p>Bonus de mélée : <input type="text" [(ngModel)]="character.meleeBonus"></p>
 
-    <table>
+    <table *ngIf="this.character.bodyParts.length > 0">
       <tr>
         <td colspan="4" rowspan="3"></td><td colspan="4">Tête ( 1 - 2 )</td><td colspan="4" rowspan="3"></td>
       </tr>

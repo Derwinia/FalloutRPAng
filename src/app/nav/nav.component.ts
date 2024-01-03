@@ -25,10 +25,4 @@ export class NavComponent {
       }
     });
   }
-
-  setPath(path : string){
-    this._ruleService.setPath(path);
-  }
-
-
 }

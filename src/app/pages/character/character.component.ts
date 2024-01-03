@@ -1,4 +1,4 @@
-import { Component, numberAttribute } from '@angular/core';
+import { Attribute, Component, numberAttribute } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PlayerModel, TeamModel } from 'src/app/models/player.model';
 import { PlayerService } from 'src/app/services/player.service';
@@ -14,12 +14,95 @@ import { AmmoModel, CharacterModel, ChemicalModel, DrinkModel, EquipementModel, 
 })
 export class CharacterComponent {
 
-  activePanel : number = 4;
+  activePanel : number = 5;
   isLoading : boolean = false;
   player: PlayerModel = {token : "", pseudo : "", team : ""};
   teams! : TeamModel[];
   players! : PlayerModel[];
-  character! : CharacterModel;
+  character : CharacterModel = {
+    caps: 0,
+    id: 0,
+    name: '',
+    xp: 0,
+    xpToNext: 0,
+    origin: '',
+    level: 0,
+    meleeBonus: 0,
+    defence: 0,
+    initiative: 0,
+    healthPoint: 0,
+    healthPointMax: 0,
+    mentalHealthPoint: 0,
+    mentalHealthPointMax: 0,
+    poisonResilience: 0,
+    background: '',
+    maxWeight: 0,
+    attributes:{
+      id: 0,
+      strength: 0,
+      perception: 0,
+      endurance: 0,
+      charisme: 0,
+      intelligence: 0,
+      agility: 0,
+      luck: 0,
+      luckPoints: 0
+    },
+    skills: {
+      id: 0,
+      rightHanded: false,
+      leftHanded: false,
+      athletics: false,
+      athleticslvl: false,
+      lockpicking: false,
+      lockpickinglvl: false,
+      speech: false,
+      speechlvl: false,
+      stealth: false,
+      stealthlvl: false,
+      medecine: false,
+      medecinelvl: false,
+      driving: false,
+      drivinglvl: false,
+      repair: false,
+      repairlvl: false,
+      science: false,
+      sciencelvl: false,
+      survival: false,
+      survivallvl: false,
+      bartering: false,
+      barteringlvl: false,
+      bareHands: false,
+      bareHandslvl: false,
+      meleeWeapon: false,
+      meleeWeaponlvl: false,
+      lightWeapon: false,
+      lightWeaponlvl: false,
+      heavyWeapon: false,
+      heavyWeaponlvl: false,
+      energieWeapon: false,
+      energieWeaponlvl: false,
+      throwingWeapon: false,
+      throwingWeaponlvl: false,
+      explosive: false,
+      explosivelvl: false,
+      game: false,
+      gamelvl: false
+    },
+    bodyParts: [],
+    reputations: [],
+    weapons: [],
+    perks: [],
+    inventories: {
+      id: 0,
+      ammos: [],
+      chemicals: [],
+      drinks: [],
+      equipements: [],
+      foods: [],
+      materials: []
+    }
+  };
 
   constructor(
     private _playerService: PlayerService,
@@ -51,6 +134,11 @@ export class CharacterComponent {
     }
 
   }
+
+  save(){
+    this._characterService.characterUpdate(this.character)
+  }
+
 //#region admin function
   createTeam(){
     const dialogConfig = new MatDialogConfig();
@@ -89,42 +177,6 @@ export class CharacterComponent {
     dialogRef.afterClosed().subscribe(
         data => this._playerService.createPlayer(data)
     );
-  }
-//#endregion
-
-  save(){
-    this._characterService.characterUpdate(this.character)
-  }
-
-//#region inventory page
-  totalWeigth() : number{
-    let total : number = 0;
-
-    this.character.inventories.ammos.forEach(element => {
-      total += element.weight*element.quantity
-    });
-
-    this.character.inventories.chemicals.forEach(element => {
-      total += element.weight*element.quantity
-    });
-
-    this.character.inventories.drinks.forEach(element => {
-      total += element.weight*element.quantity
-    });
-
-    this.character.inventories.equipements.forEach(element => {
-      total += element.weight*element.quantity
-    });
-
-    this.character.inventories.foods.forEach(element => {
-      total += element.weight*element.quantity
-    });
-
-    this.character.inventories.materials.forEach(element => {
-      total += element.weight*element.quantity
-    });
-
-    return total;
   }
 //#endregion
 
@@ -174,6 +226,36 @@ export class CharacterComponent {
 //#endregion
 
 //#region inventory
+totalWeigth() : number{
+  let total : number = 0;
+
+  this.character.inventories.ammos.forEach(element => {
+    total += element.weight*element.quantity
+  });
+
+  this.character.inventories.chemicals.forEach(element => {
+    total += element.weight*element.quantity
+  });
+
+  this.character.inventories.drinks.forEach(element => {
+    total += element.weight*element.quantity
+  });
+
+  this.character.inventories.equipements.forEach(element => {
+    total += element.weight*element.quantity
+  });
+
+  this.character.inventories.foods.forEach(element => {
+    total += element.weight*element.quantity
+  });
+
+  this.character.inventories.materials.forEach(element => {
+    total += element.weight*element.quantity
+  });
+
+  return total;
+}
+
 ammoCreate(){
   this._characterService.ammoCreate(this.character.inventories.id).subscribe(
     (response) => {
