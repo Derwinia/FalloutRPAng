@@ -41,4 +41,60 @@ export class CharacterService {
   perkDelete(perk : number){
     return this._http.delete(environment.base_url + '/Character/Character-Perk-Delete/'+perk);
   }
+
+  ammoCreate(concernedInventory : number): Observable<{ ammoId: number, message: string }> {
+    return this._http.post<{ ammoId: number, message: string }>(environment.base_url + '/Character/Character-Ammo-Create/'+concernedInventory, null);
+  }
+
+  ammoDelete(ammo : number){
+    return this._http.delete(environment.base_url + '/Character/Character-Ammo-Delete/'+ammo);
+  }
+
+  chemCreate(concernedInventory : number): Observable<{ chemId: number, message: string }> {
+    return this._http.post<{ chemId: number, message: string }>(environment.base_url + '/Character/Character-Chem-Create/'+concernedInventory, null);
+  }
+
+  chemDelete(chem : number){
+    return this._http.delete(environment.base_url + '/Character/Character-Chem-Delete/'+chem);
+  }
+
+  drinkCreate(concernedInventory : number): Observable<{ drinkId: number, message: string }> {
+    return this._http.post<{ drinkId: number, message: string }>(environment.base_url + '/Character/Character-Drink-Create/'+concernedInventory, null);
+  }
+
+  drinkDelete(drink : number){
+    return this._http.delete(environment.base_url + '/Character/Character-Drink-Delete/'+drink);
+  }
+
+  equipCreate(concernedInventory : number): Observable<{ equipId: number, message: string }> {
+    return this._http.post<{ equipId: number, message: string }>(environment.base_url + '/Character/Character-Equip-Create/'+concernedInventory, null);
+  }
+
+  equipDelete(equip : number){
+    return this._http.delete(environment.base_url + '/Character/Character-Equip-Delete/'+equip);
+  }
+
+  foodCreate(concernedInventory : number): Observable<{ foodId: number, message: string }> {
+    return this._http.post<{ foodId: number, message: string }>(environment.base_url + '/Character/Character-Food-Create/'+concernedInventory, null);
+  }
+
+  foodDelete(food : number){
+    return this._http.delete(environment.base_url + '/Character/Character-Food-Delete/'+food);
+  }
+
+  matCreate(concernedInventory : number): Observable<{ matId: number, message: string }> {
+    return this._http.post<{ matId: number, message: string }>(environment.base_url + '/Character/Character-Mat-Create/'+concernedInventory, null);
+  }
+
+  matDelete(mat : number){
+    return this._http.delete(environment.base_url + '/Character/Character-Mat-Delete/'+mat);
+  }
+
+  reputationCreate(concernedCharacter : number): Observable<{ repId: number, message: string }> {
+    return this._http.post<{ repId: number, message: string }>(environment.base_url + '/Character/Character-Reputation-Create/'+concernedCharacter, null);
+  }
+
+  reputationDelete(rep : number){
+    return this._http.delete(environment.base_url + '/Character/Character-Reputation-Delete/'+rep);
+  }
 }

@@ -221,7 +221,7 @@
       / <input type="text" [(ngModel)]="character.maxWeight"></p>
 
     <div>
-      <h2>Munitions :</h2>
+      <h2>Munitions : <button (click)="ammoCreate()">Rajouter un type de munition</button></h2>
       <table>
         <tr>
           <th>Nom</th><th>Quantité</th><th>Poids / u</th><th>Poids total</th>
@@ -231,12 +231,13 @@
           <td><input type="text" [(ngModel)]="item.quantity"></td>
           <td><input type="text" [(ngModel)]="item.weight"></td>
           <td><p>{{item.quantity*item.weight}}</p></td>
+          <td><button (click)="ammoDelete(item)" class="del">Supprimer</button></td>
         </tr>
       </table>
     </div>
 
     <div>
-      <h2>Produits chimiques :</h2>
+      <h2>Produits chimiques : <button (click)="chemCreate()">Rajouter un type de produit</button></h2>
       <table>
         <tr>
           <th>Nom</th><th>Quantité</th><th>Poids / u</th><th>Poids total</th>
@@ -246,12 +247,13 @@
           <td><input type="text" [(ngModel)]="item.quantity"></td>
           <td><input type="text" [(ngModel)]="item.weight"></td>
           <td><p>{{item.quantity*item.weight}}</p></td>
+          <td><button (click)="chemDelete(item)" class="del">Supprimer</button></td>
         </tr>
       </table>
     </div>
 
     <div>
-      <h2>Boissons :</h2>
+      <h2>Boissons : <button (click)="drinkCreate()">Rajouter un type de boisson</button></h2>
       <table>
         <tr>
           <th>Nom</th><th>Quantité</th><th>Poids / u</th><th>Poids total</th>
@@ -261,12 +263,13 @@
           <td><input type="text" [(ngModel)]="item.quantity"></td>
           <td><input type="text" [(ngModel)]="item.weight"></td>
           <td><p>{{item.quantity*item.weight}}</p></td>
+          <td><button (click)="drinkDelete(item)" class="del">Supprimer</button></td>
         </tr>
       </table>
     </div>
 
     <div>
-      <h2>Equipements :</h2>
+      <h2>Equipements : <button (click)="equipCreate()">Rajouter un type d'équipement</button></h2>
       <table>
         <tr>
           <th>Nom</th><th>Quantité</th><th>Poids / u</th><th>Poids total</th>
@@ -276,12 +279,13 @@
           <td><input type="text" [(ngModel)]="item.quantity"></td>
           <td><input type="text" [(ngModel)]="item.weight"></td>
           <td><p>{{item.quantity*item.weight}}</p></td>
+          <td><button (click)="equipDelete(item)" class="del">Supprimer</button></td>
         </tr>
       </table>
     </div>
 
     <div>
-      <h2>Nourritures :</h2>
+      <h2>Nourritures : <button (click)="foodCreate()">Rajouter un type de nourriture</button></h2>
       <table>
         <tr>
           <th>Nom</th><th>Quantité</th><th>Poids / u</th><th>Poids total</th>
@@ -291,12 +295,13 @@
           <td><input type="text" [(ngModel)]="item.quantity"></td>
           <td><input type="text" [(ngModel)]="item.weight"></td>
           <td><p>{{item.quantity*item.weight}}</p></td>
+          <td><button (click)="foodDelete(item)" class="del">Supprimer</button></td>
         </tr>
       </table>
     </div>
 
     <div>
-      <h2>Matériaux :</h2>
+      <h2>Matériaux : <button (click)="matCreate()">Rajouter un type de matériel</button></h2>
       <table>
         <tr>
           <th>Nom</th><th>Quantité</th><th>Poids / u</th><th>Poids total</th>
@@ -306,6 +311,7 @@
           <td><input type="text" [(ngModel)]="item.quantity"></td>
           <td><input type="text" [(ngModel)]="item.weight"></td>
           <td><p>{{item.quantity*item.weight}}</p></td>
+          <td><button (click)="matDelete(item)" class="del">Supprimer</button></td>
         </tr>
       </table>
     </div>
@@ -316,6 +322,7 @@
   <div *ngIf="activePanel == 5" id="panel5">
     <p>Origine de {{character.name}} : <input type="text" [(ngModel)]="character.origin"></p>
     <p>Background : <br> <input type="textarea" [(ngModel)]="character.background"></p>
+    <button (click)="reputationCreate()">Rajouter une réputation</button>
     <table>
       <tr>
         <th>Rang</th><th>Nom</th>
@@ -323,13 +330,14 @@
       <tr *ngFor="let rep of character.reputations">
         <td><input type="text" [(ngModel)]="rep.rank"></td>
         <td><input type="text" [(ngModel)]="rep.name"></td>
+        <td><button (click)="reputationDelete(rep)" class="del">Supprimer</button></td>
       </tr>
     </table>
   </div>
 
 </div>
 
-
+<!-- Panel d'admin -->
 <div *ngIf="player.team =='admin'">
   <div id="command">
     <button (click)="createTeam()">Créer une nouvelle équipe</button>
@@ -349,7 +357,7 @@
   </div>
 </div>
 
-
+<!-- Panel de non connecté -->
 <div *ngIf="!player.pseudo" id="connexionNeed">
   <p>Vous devez être connecté pour pouvoir accéder à cette page !</p>
   <button [routerLink]="['/home']" routerLinkActive="router-link-active" >Accueil</button>
